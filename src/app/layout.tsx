@@ -1,24 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { siteConfig } from "@/config";
+import { Bebas_Neue, DM_Sans, Pinyon_Script } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const bebasNeue = Bebas_Neue({
+  weight: "400",
   subsets: ["latin"],
+  variable: "--font-bebas",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const dmSans = DM_Sans({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const pinyonScript = Pinyon_Script({
+  weight: "400",
   subsets: ["latin"],
+  variable: "--font-script",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s | ${siteConfig.name}`,
-  },
-  description: siteConfig.description,
+  title: "Nguyen Phuong Nguyen — Marketing Portfolio",
+  description:
+    "Content Marketing · Influencer Marketing · Social Media portfolio of Nguyen Phuong Nguyen, Marketing senior at Ton Duc Thang University.",
 };
 
 export default function RootLayout({
@@ -28,10 +35,12 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="vi"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      lang="en"
+      className={`${bebasNeue.variable} ${dmSans.variable} ${pinyonScript.variable} h-full scroll-smooth`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="min-h-full bg-cream text-cocoa font-sans antialiased selection:bg-blush selection:text-cocoa">
+        {children}
+      </body>
     </html>
   );
 }
