@@ -20,9 +20,14 @@
 # production
 /build
 
-# misc
+# misc & OS
 .DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
 *.pem
+*.log
 
 # debug
 npm-debug.log*
@@ -30,8 +35,9 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files (secrets, keys)
 .env*
+!.env.example
 
 # vercel
 .vercel
@@ -39,3 +45,26 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDEs & Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# AI Assistant configs
+.claude/
+.gemini/
+
+# Scratch & Temporary dev files
+check-images.js
+public/test.txt
+public/source/raw_*
+public/out/
+
+# Legacy extracted & duplicate image directories (~90MB)
+/source/
+src/out/
+public/portfolio-pages/
+public/hd-pages/
+public/optimized-pages/
