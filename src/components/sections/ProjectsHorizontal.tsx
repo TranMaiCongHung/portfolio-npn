@@ -2,20 +2,111 @@
 
 import React, { useRef, useState, useEffect } from "react";
 import Image from "next/image";
-import { ArrowDownRight, FastForward, ArrowRight } from "lucide-react";
+import { ArrowDown, ArrowRight } from "lucide-react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { SCENES } from "@/data/portfolioData";
+import { AnimatedCounter } from "@/components/common/AnimatedCounter";
+
+export interface SceneCardData {
+  number: string;
+  kicker: string;
+  title: string;
+  category: string;
+  description: string;
+  statValue: string;
+  statLabel: string;
+  image: string;
+  targetId: string;
+}
+
+export const SIX_SCENES: SceneCardData[] = [
+  {
+    number: "01",
+    kicker: "Project 01",
+    title: "INFLUENCER MARKETING",
+    category: "KOC Booking & Creator Coordination",
+    description: "KOC booking and creator coordination across Facebook, TikTok and Threads.",
+    statValue: "300+",
+    statLabel: "KOC profiles researched and screened, 70+ creators coordinated",
+    image: "/source/s01-hero.webp",
+    targetId: "page-2",
+  },
+  {
+    number: "02",
+    kicker: "Project 02",
+    title: "SOCIAL MEDIA & COMMUNICATIONS",
+    category: "Communications Collaborator",
+    description: "Vietnam Finland International School: content for Facebook, Instagram and TikTok.",
+    statValue: "30+",
+    statLabel: "content pieces produced and edited, top video 20K+ views",
+    image: "/source/vfis_showcase.webp",
+    targetId: "project-2",
+  },
+  {
+    number: "03",
+    kicker: "Project 03",
+    title: "CONTENT MARKETING",
+    category: "MLAND Coastal Intern",
+    description: "MLAND Coastal intern: real estate short-form content and video planning.",
+    statValue: "Intern",
+    statLabel: "Jun to Sep 2025, short-form content support",
+    image: "/source/s03-hero.webp",
+    targetId: "project-3",
+  },
+  {
+    number: "04",
+    kicker: "Project 04",
+    title: "HCMC MARATHON 2025",
+    category: "Event Operations Support",
+    description: "Event and on-site coordination, supporting the team during peak hours.",
+    statValue: "1,000",
+    statLabel: "participants (approx.) at the event",
+    image: "/source/s04-hero.webp",
+    targetId: "project-4",
+  },
+  {
+    number: "05",
+    kicker: "Project 05",
+    title: "CULTURE STAR",
+    category: "Team Business Challenge",
+    description: "Team competition: university research and business challenge.",
+    statValue: "Top 4",
+    statLabel: "among participating universities",
+    image: "/source/s05-hero.webp",
+    targetId: "project-5",
+  },
+  {
+    number: "06",
+    kicker: "Project 06",
+    title: "PERSONAL BRANDING",
+    category: "Creator Content & Community",
+    description: "Everyday stories, creative marketing journey, and lifestyle on Threads.",
+    statValue: "5.5K+",
+    statLabel: "followers & active community reach",
+    image: "/source/threads_showcase.webp",
+    targetId: "project-threads",
+  },
+];
+
+function formatStatValue(val: string) {
+  return <AnimatedCounter value={val} duration={1600} />;
+}
 
 export function ProjectsHorizontal() {
   const sectionRef = useRef<HTMLElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const row1Ref = useRef<HTMLDivElement>(null);
-  const row2Ref = useRef<HTMLDivElement>(null);
+  const introContainerRef = useRef<HTMLDivElement>(null);
+  const badgeContainerRef = useRef<HTMLDivElement>(null);
+  const metaContainerRef = useRef<HTMLDivElement>(null);
+  const cardsTrackRef = useRef<HTMLDivElement>(null);
+  const progressCircleRef = useRef<SVGCircleElement>(null);
+  const inviteRingRef = useRef<HTMLDivElement>(null);
+  const counterTextRef = useRef<HTMLSpanElement>(null);
 
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [currentSceneIdx, setCurrentSceneIdx] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+
+  // SVG Ring calculation
+  const ringRadius = 58;
+  const circumference = 2 * Math.PI * ringRadius;
 
   useEffect(() => {
     const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -27,105 +118,193 @@ export function ProjectsHorizontal() {
     gsap.registerPlugin(ScrollTrigger);
 
     const section = sectionRef.current;
-    const track = trackRef.current;
-    const row1 = row1Ref.current;
-    const row2 = row2Ref.current;
+    const introContainer = introContainerRef.current;
+    const badgeContainer = badgeContainerRef.current;
+    const metaContainer = metaContainerRef.current;
+    const cardsTrack = cardsTrackRef.current;
 
-    if (!section || !track || !row1 || !row2) return;
+    if (!section || !cardsTrack || !badgeContainer || !introContainer || !metaContainer) return;
 
-    // Small delay to ensure layout and image sizes are fully calculated
+    const isMobile = window.innerWidth < 768;
+    const isTablet = window.innerWidth >= 768 && window.innerWidth < 1024;
+
+    // Timer ensures DOM measurements and fonts are completely loaded
+    let refreshTimers: NodeJS.Timeout[] = [];
     const timer = setTimeout(() => {
-      // Calculate how far the track needs to slide horizontally
-      const scrollWidth = Math.max(row1.scrollWidth, row2.scrollWidth);
-      const scrollDistance = Math.max(scrollWidth - window.innerWidth + 200, 1200);
+      const windowWidth = window.innerWidth;
+
+      // Card dimensions
+      const cardWidth = isMobile ? 240 : (isTablet ? 270 : 295);
+      const cardGap = isMobile ? 16 : (isTablet ? 20 : 24);
+
+      // Starting position at scroll start (p = 0):
+      // Matches the sample mockup: Card 1 is immediately visible to the right of the center badge,
+      // and Card 2 is already peeking in from the right edge!
+      const initialX = isMobile
+        ? Math.round(windowWidth * 0.38)
+        : Math.round(windowWidth * 0.5 + 85);
+
+      // Ending position:
+      // Card 06 (the final item) is centered directly behind the PROJECTS circle badge,
+      // perfectly matching the user's reference screenshot.
+      const finalX = Math.round(
+        windowWidth / 2 - cardWidth / 2 - (SIX_SCENES.length - 1) * (cardWidth + cardGap)
+      );
+
+      // Pinned scroll length: comfortable and smooth scrubbing
+      const scrollDistance = Math.max(window.innerHeight * (isMobile ? 2.5 : 3.0), 2400);
 
       const ctx = gsap.context(() => {
+        // Initial setup at p = 0: All components are positioned and visible
+        gsap.set(cardsTrack, { x: initialX, opacity: 1 });
+        gsap.set(metaContainer, { opacity: 1, y: 0 });
+        gsap.set(badgeContainer, { scale: 1.0 });
+        gsap.set(introContainer, { opacity: 1, x: 0 });
+
         const tl = gsap.timeline({
           scrollTrigger: {
             trigger: section,
             pin: true,
-            scrub: 0.8,
+            pinSpacing: true, // Guarantees proper spacer height so subsequent sections never overlap
+            scrub: true, // Exact 1:1 sync with Lenis: zero lag, zero boundary hitch when scrolling up or down
             start: "top top",
             end: () => `+=${scrollDistance}`,
             invalidateOnRefresh: true,
-            anticipatePin: 1,
             onUpdate: (self) => {
               const p = self.progress;
-              setScrollProgress(p);
-              const idx = Math.min(Math.floor(p * SCENES.length), SCENES.length - 1);
-              setCurrentSceneIdx(idx);
+
+              // 1. Direct GPU/DOM update for SVG Circular progress arc (NO React re-render overhead)
+              if (progressCircleRef.current) {
+                const offset = circumference * (1 - p);
+                progressCircleRef.current.style.strokeDashoffset = `${offset}px`;
+              }
+
+              // 2. Direct DOM update for invitation dashed ring (NO React re-render overhead)
+              if (inviteRingRef.current) {
+                inviteRingRef.current.style.opacity = p < 0.04 ? "1" : "0";
+              }
+
+              // 3. Direct DOM update for active scene counter (NO React re-render overhead)
+              if (counterTextRef.current) {
+                const activeScene = Math.min(
+                  Math.floor(p * SIX_SCENES.length),
+                  SIX_SCENES.length - 1
+                );
+                counterTextRef.current.textContent = `0${activeScene + 1} / 06`;
+              }
             },
           },
         });
 
-        // Row 1 slides left
+        // 1. Horizontal cards track movement: continuous smooth glide across the full scroll distance
+        // Card 06 is centered at the exact end, immediately responding both forward and backward
         tl.to(
-          row1,
+          cardsTrack,
           {
-            x: () => -(scrollDistance * 1.03),
+            x: finalX,
+            duration: 1.0,
             ease: "none",
           },
           0
         );
 
-        // Row 2 slides left with subtle parallax speed difference
+        // 2. Left intro title smoothly fades out as cards glide to the left
         tl.to(
-          row2,
+          introContainer,
           {
-            x: () => -(scrollDistance * 0.97),
-            ease: "none",
+            opacity: 0,
+            x: -45,
+            duration: 0.20,
+            ease: "power1.inOut",
           },
           0
         );
       }, section);
 
-      return () => ctx.revert();
-    }, 100);
+      // Immediately refresh ScrollTrigger to guarantee pin-spacer height is measured accurately
+      ScrollTrigger.refresh();
 
-    return () => clearTimeout(timer);
+      // Refresh again at intervals as images and fonts in preceding sections finish loading
+      [300, 800, 1500, 2500].forEach((delay) => {
+        refreshTimers.push(
+          setTimeout(() => {
+            ScrollTrigger.refresh();
+          }, delay)
+        );
+      });
+
+      return () => {
+        ctx.revert();
+        refreshTimers.forEach(clearTimeout);
+      };
+    }, 120);
+
+    const handleWindowLoad = () => ScrollTrigger.refresh();
+    const handleWindowResize = () => ScrollTrigger.refresh();
+    window.addEventListener("load", handleWindowLoad);
+    window.addEventListener("resize", handleWindowResize);
+
+    return () => {
+      clearTimeout(timer);
+      refreshTimers.forEach(clearTimeout);
+      window.removeEventListener("load", handleWindowLoad);
+      window.removeEventListener("resize", handleWindowResize);
+    };
   }, []);
 
-  const scrollToScene = (sceneNumber: string) => {
-    const target = document.getElementById(`scene-${sceneNumber}`);
+  const scrollToScene = (targetId: string) => {
+    const el = document.getElementById(targetId);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  const handleSkipProjects = () => {
+    const target =
+      document.getElementById("page-2") ||
+      document.getElementById("project-details") ||
+      document.getElementById("project-1");
     if (target) {
       target.scrollIntoView({ behavior: "smooth" });
     }
   };
 
-  const handleSkipProjects = () => {
-    const afterEl = document.getElementById("project-details");
-    if (afterEl) {
-      afterEl.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  // Accessible fallback for users with prefers-reduced-motion
+  // Accessible Fallback for prefers-reduced-motion
   if (reducedMotion) {
     return (
-      <section id="projects" className="py-20 px-4 max-w-7xl mx-auto">
-        <h2 className="font-heading text-4xl text-[#3A2A28] uppercase mb-10">
-          Featured Projects & Scenes
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {SCENES.map((scene) => (
+      <section
+        id="projects"
+        className="w-full bg-[#FFFFFF] text-[#2E2220] py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-[#E8DFDC]"
+      >
+        <div className="mb-10 text-center">
+          <h2 className="font-heading font-black text-3xl sm:text-5xl text-[#2E2220] uppercase tracking-tight">
+            <span>OVERVIEW</span>{" "}
+            <span className="text-[#F2C4C4]">CAMPAIGN</span>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {SIX_SCENES.map((scene) => (
             <div
               key={scene.number}
-              onClick={() => scrollToScene(scene.number)}
-              className="p-6 rounded-3xl bg-white border border-[rgba(58,42,40,0.1)] cursor-pointer hover:border-[#C9707B] transition-colors"
+              onClick={() => scrollToScene(scene.targetId)}
+              className="p-5 rounded-3xl bg-white border border-[#E8DFDC] shadow-md hover:border-[#C9707B] transition-all cursor-pointer flex flex-col justify-between"
             >
-              <span className="text-xs font-bold text-[#C9707B] uppercase tracking-widest">
-                {scene.kicker}
-              </span>
-              <h3 className="font-heading text-2xl text-[#3A2A28] mt-1 mb-2">
+              <div className="relative w-full h-[220px] rounded-2xl overflow-hidden bg-black/5 mb-4">
+                <Image src={scene.image} alt={scene.title} fill className="object-cover" />
+                <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-black/60 text-white text-[10px] font-heading font-bold uppercase">
+                  {scene.kicker}
+                </span>
+              </div>
+              <h3 className="font-heading font-black text-lg text-[#2E2220] uppercase mb-2">
                 {scene.title}
               </h3>
-              <p className="text-sm text-[#5A4340] mb-4">{scene.role}</p>
-              <div className="relative rounded-xl overflow-hidden mb-4 h-[220px] bg-[#F9FAFB] flex items-center justify-center p-2 border border-[rgba(58,42,40,0.06)]">
-                <Image src={scene.heroImage.src} alt={scene.heroImage.alt} fill className="object-contain p-2" />
-              </div>
-              <div className="flex items-center justify-between text-xs font-semibold text-[#C9707B]">
-                <span>Result: {scene.resultStat.value}</span>
-                <span className="flex items-center gap-1">Jump to details <ArrowRight className="w-3.5 h-3.5" /></span>
+              <p className="text-xs text-[#5A4340] mb-4">{scene.description}</p>
+              <div className="pt-3 border-t border-[#E8DFDC] flex items-baseline gap-2">
+                <span className="font-bevan bevan-regular text-xl text-[#F2C4C4]">
+                  {formatStatValue(scene.statValue)}
+                </span>
+                <span className="text-[11px] text-[#7E6B69]">{scene.statLabel}</span>
               </div>
             </div>
           ))}
@@ -134,208 +313,178 @@ export function ProjectsHorizontal() {
     );
   }
 
-  // Circular progress ring calculations
-  const ringRadius = 68;
-  const circumference = 2 * Math.PI * ringRadius;
-  const strokeOffset = circumference * (1 - Math.min(Math.max(scrollProgress, 0), 1));
-
   return (
     <section
       id="projects"
       ref={sectionRef}
       aria-label="Projects Horizontal Scroll Gallery"
-      className="relative w-full h-[100svh] overflow-hidden bg-white flex flex-col justify-between py-4 sm:py-6 select-none z-30"
+      className="relative w-full h-screen overflow-hidden bg-transparent flex items-center justify-center select-none transform-gpu will-change-transform"
     >
-      {/* Top Header Bar */}
-      <div className="relative z-40 flex items-center justify-between px-6 sm:px-12 w-full max-w-7xl mx-auto flex-shrink-0">
-        <div className="flex items-center gap-3">
-          <span className="px-3.5 py-1 rounded-full text-xs font-heading tracking-widest uppercase bg-[#C9707B] text-white">
-            Featured Gallery
-          </span>
-          <span className="text-xs uppercase tracking-wider text-[#7E6B69] font-medium hidden sm:inline-block">
-            Scroll vertically to slide projects · Detailed case studies below
-          </span>
-        </div>
+      {/* Background delicate radial glow behind center badge */}
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[480px] h-[480px] rounded-full bg-[#FFF5F6] blur-3xl pointer-events-none -z-10 opacity-70" />
 
-        {/* Skip Projects Accessibility Link */}
-        <button
-          onClick={handleSkipProjects}
-          className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs uppercase tracking-wider font-semibold text-[#5A4340] hover:text-[#3A2A28] hover:bg-white border border-[rgba(58,42,40,0.15)] bg-white/80 backdrop-blur-sm transition-all interactive-hover shadow-sm"
-        >
-          <span>Jump to details</span>
-          <FastForward className="w-3.5 h-3.5 text-[#C9707B]" />
-        </button>
+      {/* ========================================================= */}
+      {/* INTRO TITLE (Left aligned in view)                        */}
+      {/* ========================================================= */}
+      <div
+        ref={introContainerRef}
+        className="absolute left-6 sm:left-12 lg:left-16 xl:left-20 top-[28%] sm:top-[30%] z-20 pointer-events-none max-w-[36vw] sm:max-w-[40vw] lg:max-w-md xl:max-w-lg will-change-transform"
+      >
+        {/* Big Title: OVERVIEW CAMPAIGN (2 lines, fits cleanly without touching circle badge) */}
+        <h2 className="font-heading font-black text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] xl:text-[4.75rem] text-[#2E2220] tracking-tight leading-[0.92] uppercase">
+          <span className="block">OVERVIEW</span>
+          <span className="block text-[#F2C4C4]">CAMPAIGN</span>
+        </h2>
       </div>
 
-      {/* FIXED CENTER BADGE: Circular "PROJECTS" Badge with Rose Arc Progress Ring */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none flex flex-col items-center">
-        <div className="relative w-36 h-36 sm:w-40 sm:h-40 rounded-full bg-white shadow-2xl shadow-[rgba(58,42,40,0.15)] flex flex-col items-center justify-center p-3 border border-[rgba(58,42,40,0.1)]">
-          {/* SVG Circular Progress Ring filling clockwise as scroll advances */}
+      {/* ========================================================= */}
+      {/* FIXED CENTER BADGE: Circular "PROJECTS" Badge             */}
+      {/* ========================================================= */}
+      <div
+        ref={badgeContainerRef}
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-40 pointer-events-none flex flex-col items-center will-change-transform"
+      >
+        <div className="relative w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-white shadow-[0_18px_45px_rgba(58,42,40,0.13)] flex flex-col items-center justify-center p-2.5 border border-[#E8DFDC]">
+          {/* Subtle Rotating Invitation Ring at the start */}
+          <div
+            ref={inviteRingRef}
+            className="absolute -inset-2 rounded-full border border-dashed border-[#C9707B]/40 transition-opacity duration-300 pointer-events-none opacity-100 animate-spin-slow will-change-opacity"
+          />
+
+          {/* SVG Circular Progress Ring (0% -> 100% clockwise) */}
           <svg
             className="absolute inset-0 w-full h-full transform -rotate-90 pointer-events-none"
-            viewBox="0 0 160 160"
+            viewBox="0 0 140 140"
           >
+            {/* Background Track */}
             <circle
-              cx="80"
-              cy="80"
+              cx="70"
+              cy="70"
               r={ringRadius}
               fill="none"
               stroke="rgba(58, 42, 40, 0.08)"
               strokeWidth="3"
             />
+            {/* Active Progress Arc */}
             <circle
-              cx="80"
-              cy="80"
+              ref={progressCircleRef}
+              cx="70"
+              cy="70"
               r={ringRadius}
               fill="none"
-              stroke="#C9707B"
-              strokeWidth="4"
+              stroke="#8C464F"
+              strokeWidth="3.5"
               strokeDasharray={circumference}
-              strokeDashoffset={strokeOffset}
+              strokeDashoffset={circumference}
               strokeLinecap="round"
-              className="transition-[stroke-dashoffset] duration-75 ease-out"
+              className="will-change-[stroke-dashoffset]"
             />
           </svg>
 
-          {/* Inner Content */}
-          <div className="text-center px-2">
-            <span className="font-heading text-lg sm:text-2xl text-[#3A2A28] tracking-widest font-bold block leading-none">
+          {/* Inner Badge Typography: Refined & Smaller "PROJECTS" label */}
+          <div className="text-center px-2 select-none">
+            <span className="font-heading text-[11px] sm:text-xs text-[#2E2220] tracking-[0.22em] font-extrabold block leading-none pl-[0.22em]">
               PROJECTS
             </span>
-            <span className="font-heading text-xs sm:text-sm text-[#C9707B] font-semibold tracking-wider block mt-1">
-              SCENE 0{currentSceneIdx + 1} / 06
-            </span>
-            <span className="text-[10px] uppercase tracking-wider text-[#7E6B69] font-medium hidden sm:block mt-1">
-              Full details below
+            <span className="font-heading text-[8px] sm:text-[9px] text-[#F2C4C4] font-bold tracking-[0.25em] block mt-1.5 uppercase pl-[0.25em]">
+              SCROLL
             </span>
           </div>
         </div>
       </div>
 
-      {/* TWO STAGGERED PARALLAX MOSAIC ROWS */}
+      {/* ========================================================= */}
+      {/* COUNTER (Top Right of Scene)                              */}
+      {/* ========================================================= */}
       <div
-        ref={trackRef}
-        className="relative w-full flex-1 flex flex-col justify-center gap-3 sm:gap-4 my-auto overflow-hidden px-4"
+        ref={metaContainerRef}
+        className="absolute top-6 sm:top-8 right-6 sm:right-14 z-30 pointer-events-none flex flex-col items-end will-change-transform"
       >
-        {/* ROW 1 */}
-        <div
-          ref={row1Ref}
-          className="flex items-center gap-4 sm:gap-6 will-change-transform pl-[8vw] sm:pl-[14vw]"
+        <span
+          ref={counterTextRef}
+          className="font-heading font-black text-2xl sm:text-3xl lg:text-[2.35rem] text-[#2E2220] tracking-tight leading-none"
         >
-          {SCENES.map((scene) => (
+          01 / 06
+        </span>
+      </div>
+
+      {/* ========================================================= */}
+      {/* HORIZONTAL CARDS TRACK: 6 Compact Staggered Cards (Up/Down) */}
+      {/* ========================================================= */}
+      <div
+        ref={cardsTrackRef}
+        className="absolute top-1/2 -translate-y-1/2 left-0 flex items-center gap-4 sm:gap-5 lg:gap-6 will-change-transform z-20 pointer-events-auto"
+      >
+        {SIX_SCENES.map((scene, index) => {
+          const isUp = index % 2 === 0;
+          // Items in the low position jump up on hover; items already high stay high
+          const shiftClass = isUp
+            ? "-translate-y-5 sm:-translate-y-7 lg:-translate-y-8 hover:scale-[1.02]"
+            : "translate-y-5 sm:translate-y-7 lg:translate-y-8 hover:-translate-y-5 sm:hover:-translate-y-7 lg:hover:-translate-y-8 hover:scale-[1.03]";
+
+          return (
             <div
-              key={`row1-${scene.number}`}
-              onClick={() => scrollToScene(scene.number)}
+              key={scene.number}
+              onClick={() => scrollToScene(scene.targetId)}
               role="button"
               tabIndex={0}
-              onKeyDown={(e) => { if (e.key === "Enter") scrollToScene(scene.number); }}
-              className="group project-card relative flex-shrink-0 w-[270px] sm:w-[360px] lg:w-[410px] h-[clamp(180px,28vh,240px)] rounded-2xl bg-white border border-[rgba(58,42,40,0.12)] shadow-md shadow-[rgba(58,42,40,0.04)] p-2.5 sm:p-3 cursor-pointer hover:border-[#C9707B] hover:shadow-xl transition-all duration-300 interactive-hover flex flex-col justify-between"
+              onKeyDown={(e) => {
+                if (e.key === "Enter") scrollToScene(scene.targetId);
+              }}
+              aria-label={`View ${scene.title}`}
+              className={`group project-card relative flex-shrink-0 w-[240px] sm:w-[270px] lg:w-[295px] h-[355px] sm:h-[385px] lg:h-[405px] rounded-[24px] bg-white border border-[#E8DFDC] shadow-[0_12px_30px_rgba(58,42,40,0.06)] p-2.5 sm:p-3 cursor-pointer hover:border-[#8C464F] hover:shadow-[0_20px_42px_rgba(140,70,79,0.18)] transition-all duration-300 ease-out interactive-hover flex flex-col justify-between select-none ${shiftClass}`}
             >
-              {/* Header Tag */}
-              <div className="flex items-center justify-between mb-1.5 px-1">
-                <span className="text-[11px] font-heading font-bold text-[#C9707B] tracking-wider uppercase">
-                  {scene.kicker}
-                </span>
-                <span className="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-[#F2C4C4]/60 text-[#3A2A28]">
-                  {scene.resultStat.value}
-                </span>
-              </div>
-
-              {/* Uncropped Visual Preview */}
-              <div className="relative flex-1 w-full rounded-xl overflow-hidden bg-[#F9FAFB] flex items-center justify-center p-1.5 border border-[rgba(58,42,40,0.06)]">
+              {/* Top Image Box */}
+              <div className="relative w-full h-[210px] sm:h-[230px] lg:h-[245px] rounded-[18px] overflow-hidden bg-black/5 flex-shrink-0 border border-[rgba(58,42,40,0.06)]">
                 <Image
-                  src={scene.heroImage.src}
-                  alt={scene.heroImage.alt}
+                  src={scene.image}
+                  alt={scene.title}
                   fill
-                  sizes="(min-width: 640px) 410px, 270px"
-                  className="object-contain p-1 group-hover:scale-105 transition-transform duration-500"
+                  sizes="(min-width: 640px) 295px, 240px"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
-                <div className="absolute inset-x-2 bottom-1.5 z-10 text-center opacity-90 group-hover:opacity-100 transition-opacity pointer-events-none">
-                  <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#3A2A28]/85 text-white text-[10px] sm:text-[11px] font-medium backdrop-blur-sm shadow-sm truncate max-w-[90%]">
-                    {scene.title}
-                  </span>
+                {/* Top Scene Kicker Badge */}
+                <div className="absolute top-2.5 left-2.5 z-10 px-3 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-base sm:text-lg font-pinyon pdf-script text-white normal-case leading-none select-none">
+                  {scene.kicker}
                 </div>
               </div>
 
-              {/* Footer Title */}
-              <div className="mt-1.5 px-1 flex items-center justify-between">
-                <h4 className="font-heading text-xs sm:text-sm text-[#3A2A28] uppercase tracking-wide group-hover:text-[#C9707B] transition-colors truncate max-w-[240px] sm:max-w-[320px]">
-                  {scene.title}
-                </h4>
-                <div className="flex items-center gap-1 text-[11px] text-[#C9707B] font-semibold group-hover:translate-x-0.5 transition-transform">
-                  <span>View</span>
-                  <ArrowDownRight className="w-3.5 h-3.5" />
+              {/* Bottom Card Body - Compact & Snug */}
+              <div className="flex-1 flex flex-col justify-between pt-2.5 px-1 pb-0.5">
+                <div>
+                  <h4 className="font-heading font-black text-[14px] sm:text-[15px] lg:text-[16px] text-[#2E2220] uppercase tracking-wide leading-tight group-hover:text-[#F2C4C4] transition-colors line-clamp-2">
+                    {scene.title}
+                  </h4>
+                  <p className="text-[11px] sm:text-xs text-[#5A4340] leading-snug line-clamp-2 mt-1">
+                    {scene.description}
+                  </p>
+                </div>
+
+                {/* Metric Stat Row */}
+                <div className="pt-2 border-t border-[#E8DFDC]/80 flex items-baseline gap-2">
+                  <span className="font-bevan bevan-regular text-lg sm:text-xl text-[#F2C4C4] tracking-tight leading-none flex-shrink-0">
+                    {formatStatValue(scene.statValue)}
+                  </span>
+                  <span className="text-[10px] sm:text-[11px] text-[#7E6B69] font-medium leading-tight line-clamp-2">
+                    {scene.statLabel}
+                  </span>
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* ROW 2 (Offset / Staggered) */}
-        <div
-          ref={row2Ref}
-          className="flex items-center gap-4 sm:gap-6 will-change-transform pl-[24vw] sm:pl-[34vw]"
-        >
-          {SCENES.slice().reverse().map((scene) => {
-            const secondaryImg = scene.galleryImages[0] ?? scene.heroImage;
-            return (
-              <div
-                key={`row2-${scene.number}`}
-                onClick={() => scrollToScene(scene.number)}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(e) => { if (e.key === "Enter") scrollToScene(scene.number); }}
-                className="group project-card relative flex-shrink-0 w-[250px] sm:w-[330px] lg:w-[380px] h-[clamp(180px,28vh,240px)] rounded-2xl bg-white border border-[rgba(58,42,40,0.12)] shadow-md shadow-[rgba(58,42,40,0.04)] p-2.5 sm:p-3 cursor-pointer hover:border-[#C9707B] hover:shadow-xl transition-all duration-300 interactive-hover flex flex-col justify-between"
-              >
-                <div className="flex items-center justify-between mb-1.5 px-1">
-                  <span className="text-[10px] font-heading font-bold text-[#C9707B] tracking-wider uppercase">
-                    {scene.kicker} Artifact
-                  </span>
-                  <span className="text-[10px] uppercase tracking-wider text-[#7E6B69] font-medium truncate max-w-[150px]">
-                    {scene.category}
-                  </span>
-                </div>
-
-                <div className="relative flex-1 w-full rounded-xl overflow-hidden bg-[#F9FAFB] flex items-center justify-center p-1.5 border border-[rgba(58,42,40,0.06)]">
-                  <Image
-                    src={secondaryImg.src}
-                    alt={secondaryImg.alt}
-                    fill
-                    sizes="(min-width: 640px) 380px, 250px"
-                    className="object-contain p-1 group-hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-x-2 bottom-1.5 z-10 text-center pointer-events-none">
-                    <span className="inline-block px-2.5 py-0.5 rounded-full bg-[#3A2A28]/85 text-white text-[10px] font-medium backdrop-blur-sm truncate max-w-[90%]">
-                      {secondaryImg.caption || scene.title}
-                    </span>
-                  </div>
-                </div>
-
-                <div className="mt-1.5 px-1 flex items-center justify-between">
-                  <span className="text-[11px] font-semibold text-[#3A2A28] truncate max-w-[200px]">
-                    {scene.resultStat.label}
-                  </span>
-                  <div className="flex items-center gap-1 text-[11px] text-[#C9707B] font-semibold group-hover:translate-x-0.5 transition-transform">
-                    <span>{scene.resultStat.value}</span>
-                    <ArrowDownRight className="w-3.5 h-3.5" />
-                  </div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+          );
+        })}
       </div>
 
-      {/* Bottom Helper Bar */}
-      <div className="relative z-40 flex items-center justify-between px-6 sm:px-12 w-full max-w-7xl mx-auto text-xs text-[#7E6B69] flex-shrink-0">
-        <span className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[#C9707B] animate-ping" />
-          <span>Vertical scroll slides horizontal cards · When ring completes, scrolls down to details</span>
-        </span>
-        <span className="font-semibold text-[#3A2A28]">
-          {Math.round(scrollProgress * 100)}% complete
-        </span>
-      </div>
+      {/* ========================================================= */}
+      {/* BOTTOM RIGHT: SKIP PROJECTS LINK                          */}
+      {/* ========================================================= */}
+      <button
+        onClick={handleSkipProjects}
+        className="absolute bottom-6 sm:bottom-8 right-6 sm:right-12 z-40 inline-flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-widest text-[#7E6B69] hover:text-[#F2C4C4] transition-colors interactive-hover py-1 px-2 rounded-lg hover:bg-black/5"
+      >
+        <span>SKIP PROJECTS</span>
+        <ArrowDown className="w-3.5 h-3.5" />
+      </button>
     </section>
   );
 }

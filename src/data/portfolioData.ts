@@ -264,7 +264,7 @@ export const TOOLS_LIST: ToolItem[] = [
 export const SCENES: SceneDetail[] = [
   {
     number: "01",
-    kicker: "SCENE 01",
+    kicker: "Project 01",
     projectScriptLabel: "Project 01:",
     cutout: "/source/cutout-sitting.webp",
     title: "Influencer Marketing",
@@ -384,7 +384,7 @@ export const SCENES: SceneDetail[] = [
   },
   {
     number: "02",
-    kicker: "SCENE 02",
+    kicker: "Project 02",
     projectScriptLabel: "Project 02:",
     cutout: "/source/cutout-vfis.webp",
     title: "VFIS Social Media & Communications",
@@ -445,7 +445,7 @@ export const SCENES: SceneDetail[] = [
       "I also came to appreciate the value of everyday moments in storytelling. Sometimes, simple and relatable content about school activities or student experiences can create a stronger connection than overly formal communication. This experience taught me to pay closer attention to content details, maintain consistency, and think more carefully about how each post contributes to the overall communication of the school.",
     ],
     heroImage: {
-      src: "/source/s02-video-1.webp",
+      src: "/source/p3_035.png",
       alt: "VFIS Matchday video showcase",
       caption: "MATCHDAY CINEMATIC RECAP · 15.6K+ views",
     },
@@ -464,7 +464,7 @@ export const SCENES: SceneDetail[] = [
     featuredVideos: [
       {
         id: "v-vfis-20k",
-        poster: "/source/s02-video-1.webp",
+        poster: "/source/p3_035.png",
         title: "School Life Reel",
         creator: "VFIS Communications",
         views: "20K+ views",
@@ -472,7 +472,7 @@ export const SCENES: SceneDetail[] = [
       },
       {
         id: "v-vfis-event",
-        poster: "/source/s02-video-2.webp",
+        poster: "/source/p3_036.png",
         title: "Holiday Celebration Event",
         creator: "VFIS Communications",
         views: "12K+ views",
@@ -498,7 +498,7 @@ export const SCENES: SceneDetail[] = [
   },
   {
     number: "03",
-    kicker: "SCENE 03",
+    kicker: "Project 03",
     projectScriptLabel: "Project 03:",
     cutout: "/source/cutout-white.webp",
     title: "MLAND Coastal Content Marketing",
@@ -603,7 +603,7 @@ export const SCENES: SceneDetail[] = [
   },
   {
     number: "04",
-    kicker: "SCENE 04",
+    kicker: "Project 04",
     projectScriptLabel: "Project 04:",
     cutout: "/source/cutout-marathon.webp",
     title: "HCMC Marathon 2025 (Eximbank)",
@@ -684,7 +684,7 @@ export const SCENES: SceneDetail[] = [
   },
   {
     number: "05",
-    kicker: "SCENE 05",
+    kicker: "Project 05",
     projectScriptLabel: "Project 05:",
     cutout: "/source/s05-team.webp",
     title: "Culture Start 2026",
@@ -791,12 +791,12 @@ export const SCENES: SceneDetail[] = [
       alt: "Threads channel @ursonlyonee",
     },
     resultStat: {
-      value: "121,700+",
+      value: "121.700+",
       label: "total profile views in 7 days",
     },
     additionalStats: [
-      { value: "74,600+", label: "unique viewers reached in 7 days" },
-      { value: "+125,406%", label: "increase in profile views within 7 days" },
+      { value: "74.600+", label: "unique viewers reached in 7 days" },
+      { value: "+125.406%", label: "increase in profile views within 7 days" },
       { value: "115", label: "engaged followers community" },
     ],
     overview:
@@ -849,7 +849,7 @@ export const SCENES: SceneDetail[] = [
       {
         src: "/source/threads-insights-2.webp",
         alt: "Threads viewers growth graph",
-        caption: "+125,406% profile views growth",
+        caption: "+125.406% profile views growth",
       },
       {
         src: "/source/threads-portrait.webp",
@@ -903,7 +903,7 @@ export const ALL_VIDEOS: VideoItem[] = [
   },
   {
     id: "v5",
-    poster: "/source/s02-video-1.webp",
+    poster: "/source/p3_035.png",
     title: "VFIS Campus Life Highlight",
     creator: "VFIS Communications",
     views: "20K+ views",
@@ -911,7 +911,7 @@ export const ALL_VIDEOS: VideoItem[] = [
   },
   {
     id: "v6",
-    poster: "/source/s02-video-2.webp",
+    poster: "/source/p3_036.png",
     title: "Holiday Celebration Reel",
     creator: "VFIS Communications",
     views: "12K+ views",

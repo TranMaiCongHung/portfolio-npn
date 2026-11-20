@@ -1,58 +1,50 @@
-import { Navbar } from "@/components/layout/Navbar";
-import { Hero } from "@/components/sections/Hero";
-import { RunningRibbons } from "@/components/sections/RunningRibbons";
-import { About } from "@/components/sections/About";
-import { Skills } from "@/components/sections/Skills";
-import { Tools } from "@/components/sections/Tools";
+import { PinkTopBar } from "@/components/pdf-layout/PinkTopBar";
+import { Page1HeroAbout } from "@/components/pdf-layout/Page1HeroAbout";
 import { ProjectsHorizontal } from "@/components/sections/ProjectsHorizontal";
-import { ProjectScenesDetail } from "@/components/sections/ProjectScenesDetail";
-import { FeaturedVideos } from "@/components/sections/FeaturedVideos";
-import { Contact } from "@/components/sections/Contact";
+import { Page2Influencer } from "@/components/pdf-layout/Page2Influencer";
+import { Page3Projects } from "@/components/pdf-layout/Page3Projects";
+import { Page4ThankYou } from "@/components/pdf-layout/Page4ThankYou";
+import { PagePagination } from "@/components/pdf-layout/PagePagination";
 import { FlowerCursor } from "@/components/effects/FlowerCursor";
+import { FallingFlowersBackground } from "@/components/effects/FallingFlowersBackground";
 import { BackgroundElements } from "@/components/common/BackgroundElements";
 import { SmoothScroll } from "@/components/common/SmoothScroll";
 
 export default function Home() {
   return (
     <SmoothScroll>
-      <div className="relative min-h-screen bg-white text-[#3A2A28] overflow-x-hidden">
-        {/* Global Cinematic Background Grain & Vertical 4-Column Grid */}
+      <div className="relative min-h-screen bg-[#FFFFFF] text-[#2E2220] overflow-x-hidden selection:bg-[#F2C4C4] selection:text-[#2E2220]">
+        {/* Subtle Background Grain & Vertical Guides */}
         <BackgroundElements />
+
+        {/* Ambient Falling Flowers Background (from Overview to end of page) */}
+        <FallingFlowersBackground />
 
         {/* Signature Interactive Lily Flower Cursor & Petal-Pop Particles */}
         <FlowerCursor />
 
-        {/* Floating Pill Navigation */}
-        <Navbar />
+        {/* Sticky Pink Bar matching PDF Top Bar */}
+        <PinkTopBar />
 
-        {/* Main Sections */}
-        <main>
-          {/* Hero Section */}
-          <Hero />
+        {/* Floating Quick Page Jumper (Page 1 to 4) */}
+        <PagePagination />
 
-          {/* Running Diagonal Marquee Ribbons */}
-          <RunningRibbons />
+        {/* Main Content matching the 4-page PDF layout 1-to-1 */}
+        <main className="w-full block">
+          {/* Page 1: Hero, Portrait, Education, Tools, Skills, Bio, Experiences, Moon Contact, Featured Projects */}
+          <Page1HeroAbout />
 
-          {/* About Me & Experience/Education Timeline */}
-          <About />
-
-          {/* Core Capabilities (Skills as Rows) */}
-          <Skills />
-
-          {/* Production Tools & Software (Overlapping Rotating Circles) */}
-          <Tools />
-
-          {/* Pinned Horizontal-Scroll Project Gallery (Centerpiece) */}
+          {/* Pinned Horizontal-Scroll Project Gallery (Six Scenes, One Story) */}
           <ProjectsHorizontal />
 
-          {/* Detailed In-Depth Project Case Studies (Scenes 01 to 06) */}
-          <ProjectScenesDetail />
+          {/* Page 2: Project 01 - Influencer Marketing (KOC Booking, Collaborations, Videos, Seeding, Result, Learnings) */}
+          <Page2Influencer />
 
-          {/* Featured TikTok & Short-form Videos (Vertical 9:16 Cards) */}
-          <FeaturedVideos />
+          {/* Page 3: Project 02 (VFIS), Project 03 (MLAND), Project 04 (Marathon), Project 05 (Culture Start), Personal (Threads) */}
+          <Page3Projects />
 
-          {/* Contact Banner & Cream Footer with Script Accent */}
-          <Contact />
+          {/* Page 4: Closing, High-Key Night Portrait, Contact Info, Thank You */}
+          <Page4ThankYou />
         </main>
       </div>
     </SmoothScroll>

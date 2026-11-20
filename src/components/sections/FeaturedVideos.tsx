@@ -73,7 +73,7 @@ export function FeaturedVideos() {
               <div className="relative z-10 flex items-center justify-between gap-2">
                 <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-xs font-bold text-[#3A2A28] shadow-sm">
                   <Eye className="w-3.5 h-3.5 text-[#C9707B]" />
-                  <span>{video.views}</span>
+                  <span className="font-bevan bevan-regular text-[11px] sm:text-xs tracking-normal">{video.views}</span>
                 </span>
                 <span className="px-2.5 py-1 rounded-full bg-[#C9707B]/90 backdrop-blur-md text-[10px] font-semibold uppercase tracking-wider text-white">
                   {video.tag}

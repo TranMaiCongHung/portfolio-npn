@@ -69,8 +69,8 @@ export function SceneDetailModal({
 
         {/* Modal Header */}
         <div className="flex flex-wrap items-center gap-3 mb-4">
-          <span className="px-3.5 py-1 rounded-full text-xs font-heading tracking-widest uppercase bg-[#C9707B] text-white">
-            {scene.kicker}
+          <span className="px-3.5 py-1 rounded-full text-base font-pinyon pdf-script bg-[#C9707B] text-white">
+            {scene.projectScriptLabel ?? scene.kicker}
           </span>
           <span className="px-3 py-1 rounded-full text-xs font-medium uppercase tracking-wider bg-[#F2C4C4]/50 text-[#3A2A28]">
             {scene.category}
@@ -99,7 +99,7 @@ export function SceneDetailModal({
               <Award className="w-4 h-4" />
               <span>Key Verified Result</span>
             </div>
-            <div className="font-heading text-4xl sm:text-6xl text-[#3A2A28] tracking-tight font-bold">
+            <div className="font-bevan bevan-regular text-3xl sm:text-5xl text-[#3A2A28] tracking-tight">
               {animatedValue}
             </div>
             <div className="text-sm text-[#5A4340] font-medium mt-1">
@@ -111,7 +111,7 @@ export function SceneDetailModal({
             <div className="flex flex-wrap gap-4 sm:gap-6 border-t sm:border-t-0 sm:border-l border-[rgba(58,42,40,0.1)] pt-4 sm:pt-0 sm:pl-6">
               {scene.additionalStats.map((st) => (
                 <div key={st.label}>
-                  <span className="font-heading text-2xl sm:text-3xl text-[#C9707B] font-bold block">
+                  <span className="font-bevan bevan-regular text-xl sm:text-2xl text-[#C9707B] block tracking-tight">
                     {st.value}
                   </span>
                   <span className="text-xs text-[#7E6B69] uppercase tracking-wider block max-w-[160px]">

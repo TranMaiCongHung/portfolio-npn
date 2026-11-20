@@ -40,7 +40,7 @@ export function ProjectScenesDetail() {
             {/* SCRIPT PROJECT INTRO & TOP HEADER (Faithfully matching PDF) */}
             <div className="pb-6 mb-8 border-b border-[rgba(58,42,40,0.1)]">
               {/* Elegant script label: "Project 01:", "Project 02:", "Project 03:", etc. */}
-              <span className="font-script text-3xl sm:text-4xl lg:text-5xl text-[#C9707B] italic mb-2 block select-none">
+              <span className="font-pinyon pdf-script text-3xl sm:text-4xl lg:text-5xl text-[#F2C4C4] mb-2 block select-none">
                 {scene.projectScriptLabel ?? `Project ${scene.number}:`}
               </span>
 
@@ -224,7 +224,7 @@ export function ProjectScenesDetail() {
                             className="object-contain p-1 group-hover:scale-105 transition-transform duration-300"
                           />
                           <div className="relative z-10 bg-[#3A2A28]/85 backdrop-blur-sm rounded-xl px-2 py-1 text-center">
-                            <span className="font-heading text-xs sm:text-sm text-white tracking-wide block truncate">
+                            <span className="font-bevan bevan-regular text-[11px] sm:text-xs text-white tracking-normal block truncate">
                               ▷ {vid.views}
                             </span>
                             <span className="text-[9px] text-[#F2C4C4] font-medium block truncate">
