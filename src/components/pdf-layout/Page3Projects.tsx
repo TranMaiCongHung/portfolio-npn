@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ExternalLink, ArrowRight, Award } from "lucide-react";
+import { ExternalLink, ArrowRight } from "lucide-react";
 import { InteractiveRoleList, RoleItem } from "./InteractiveRoleList";
 import { motion } from "motion/react";
 import { AnimatedCounter } from "@/components/common/AnimatedCounter";
@@ -117,7 +117,53 @@ const MARATHON_ROLE_ITEMS: RoleItem[] = [
   },
   {
     num: "03",
-    text: "Helped maintain smooth event operations and a positive participant experience.",
+    text: "Helped maintain smooth operations and positive participant experience.",
+  },
+];
+
+const CULTURE_START_ROLE_ITEMS: RoleItem[] = [
+  {
+    num: "01",
+    text: "Collaborated with team members throughout the competition.",
+  },
+  {
+    num: "02",
+    text: "Applied marketing knowledge and creativity to develop project ideas.",
+  },
+  {
+    num: "03",
+    text: "Contributed to project development and presentation.",
+  },
+  {
+    num: "04",
+    text: "Worked collaboratively to complete competition requirements.",
+  },
+];
+
+const THREADS_ROLE_ITEMS: RoleItem[] = [
+  {
+    num: "01",
+    text: "Develop and publish daily content based on personal observations.",
+  },
+  {
+    num: "02",
+    text: "Write short-form posts in a natural, conversational, relatable tone.",
+  },
+  {
+    num: "03",
+    text: "Explore trending topics and engaging relatable discussions.",
+  },
+  {
+    num: "04",
+    text: "Experiment with different writing styles and storytelling approaches.",
+  },
+  {
+    num: "05",
+    text: "Identify content themes that resonate deeply with audiences.",
+  },
+  {
+    num: "06",
+    text: "Refine content direction based on performance and interactions.",
   },
 ];
 
@@ -156,7 +202,7 @@ export function Page3Projects() {
               {/* Title & Project 02 & Badge block - Pushed to the right and aligned top and bottom with the logo */}
               <div className="flex flex-col justify-between items-start min-w-0 self-stretch">
                 <div className="flex flex-col items-start min-w-0">
-                  <span className="font-pinyon pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#F2C4C4] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
+                  <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
                     Project 02:
                   </span>
                   <h3 className="pdf-outline-title text-[1.4rem] sm:text-[2.1rem] lg:text-[2.65rem] tracking-wide leading-none">
@@ -539,7 +585,7 @@ export function Page3Projects() {
               {/* Title & Project 03 & Badge block - Pushed to the right and aligned top and bottom with the logo */}
               <div className="flex flex-col justify-between items-start min-w-0 self-stretch">
                 <div className="flex flex-col items-start min-w-0">
-                  <span className="font-pinyon pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#F2C4C4] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
+                  <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
                     Project 03:
                   </span>
                   <h3 className="pdf-outline-title text-[1.4rem] sm:text-[2.1rem] lg:text-[2.65rem] tracking-wide leading-none">
@@ -678,31 +724,6 @@ export function Page3Projects() {
                   ))}
                 </div>
               </div>
-
-              {/* Bottom Row: 2 Featured Video Cards Centered Beneath */}
-              <div className="max-w-[560px] sm:max-w-[640px] md:max-w-[700px] mx-auto grid grid-cols-2 gap-6 sm:gap-10 md:gap-14 mt-6 sm:mt-8 md:mt-10">
-                {/* Card 1: THE SUNRISE */}
-                <div className="relative rounded-2xl sm:rounded-3xl border border-black overflow-hidden shadow-sm aspect-[443/786]">
-                  <Image
-                    src="/source/s03-video-1.webp"
-                    alt="MLAND Coastal - The Sunrise"
-                    fill
-                    sizes="(max-width: 640px) 45vw, 350px"
-                    className="object-cover"
-                  />
-                </div>
-
-                {/* Card 2: Vinhomes Grand Park */}
-                <div className="relative rounded-2xl sm:rounded-3xl border border-black overflow-hidden shadow-sm aspect-[443/786]">
-                  <Image
-                    src="/source/s03-video-2.webp"
-                    alt="MLAND Coastal - Vinhomes Grand Park"
-                    fill
-                    sizes="(max-width: 640px) 45vw, 350px"
-                    className="object-cover"
-                  />
-                </div>
-              </div>
             </div>
           </div>
 
@@ -711,8 +732,30 @@ export function Page3Projects() {
             <div className="grid grid-cols-1 md:grid-cols-[460px_1fr] lg:grid-cols-[520px_1fr] xl:grid-cols-[560px_1fr] gap-8 sm:gap-10 lg:gap-14 xl:gap-16 items-center">
               {/* Left: Cutout Figure Sitting Directly on Top of Title */}
               <div className="relative flex flex-col items-center justify-center select-none w-full">
-                {/* Cutout Photo (Người ngồi tiếp xúc ngay trên đầu chữ) */}
+                {/* Cutout Photo (Người ngồi tiếp xúc ngay trên đầu chữ) with Floating Elements */}
                 <div className="relative w-44 sm:w-52 md:w-60 lg:w-64 h-64 sm:h-76 md:h-84 lg:h-[360px] z-10 -mb-1 sm:-mb-1.5">
+                  {/* 1. Floating Pastel Moon and Star (203) on the Left */}
+                  <div className="absolute -left-6 sm:-left-10 md:-left-12 lg:-left-14 top-6 sm:top-8 md:top-10 z-20 w-12 sm:w-16 md:w-20 aspect-[284/316] pointer-events-none animate-float-camera filter drop-shadow-md">
+                    <Image
+                      src="/source/203.png"
+                      alt="Pastel Moon and Star (203)"
+                      fill
+                      sizes="(max-width: 640px) 48px, (max-width: 768px) 64px, 80px"
+                      className="object-contain"
+                    />
+                  </div>
+
+                  {/* 2. Floating Crystal Stars (202) on the Right */}
+                  <div className="absolute -right-8 sm:-right-12 md:-right-16 lg:-right-20 top-16 sm:top-20 md:top-24 z-20 w-12 sm:w-16 md:w-20 aspect-[284/316] pointer-events-none animate-float-flower filter drop-shadow-sm">
+                    <Image
+                      src="/source/202.png"
+                      alt="Crystal Stars (202)"
+                      fill
+                      sizes="(max-width: 640px) 48px, (max-width: 768px) 64px, 80px"
+                      className="object-contain"
+                    />
+                  </div>
+
                   <Image
                     src="/source/cutout-sitting.webp"
                     alt="Nguyen sitting"
@@ -781,7 +824,7 @@ export function Page3Projects() {
               {/* Title & Project 04 & Badge block */}
               <div className="flex flex-col justify-between items-start min-w-0 self-stretch">
                 <div className="flex flex-col items-start min-w-0">
-                  <span className="font-pinyon pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#F2C4C4] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
+                  <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
                     Project 04:
                   </span>
                   <h3 className="pdf-outline-title text-[1.4rem] sm:text-[2.1rem] lg:text-[2.65rem] tracking-wide leading-none">
@@ -822,27 +865,33 @@ export function Page3Projects() {
                   EXPERIENCE GAINED
                 </h5>
                 <p className="text-xs sm:text-sm text-[#4A3835] leading-relaxed">
-                  Strengthened teamwork, adaptability, and problem-solving skills while working in a fast-paced event environment.
+                  Strengthened teamwork, adaptability, and problem-solving skills while working in a
+                  <br />
+                  fast-paced event environment.
                 </p>
               </div>
             </div>
 
-            {/* Right: Team Photo (Thu nhỏ lại gọn gàng, cân bằng chiều cao với cột trái) */}
+            {/* Right: Team Photo */}
             <div className="md:col-span-5 lg:col-span-5 flex justify-center md:justify-end w-full">
-              <div className="relative aspect-[16/10] sm:aspect-[16/9.5] w-full max-w-[380px] sm:max-w-[420px] lg:max-w-[450px] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E8DFDC]/80 shadow-sm bg-transparent">
+              <div
+                style={{ aspectRatio: "16 / 11", minHeight: "260px" }}
+                className="relative w-full max-w-[380px] sm:max-w-[420px] lg:max-w-[460px] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E8DFDC]/80 shadow-sm bg-transparent"
+              >
                 <Image
                   src="/source/s04-team.webp"
                   alt="Marathon Operations Team"
                   fill
-                  sizes="(max-width: 768px) 100vw, 450px"
+                  sizes="(max-width: 768px) 100vw, 460px"
                   className="object-cover"
+                  style={{ objectPosition: "center 85%" }}
                 />
               </div>
             </div>
           </div>
 
           {/* Bottom Row: 2 Photos with Centerpiece Cutout Overlap */}
-          <div className="relative w-full mt-6 sm:mt-12 lg:mt-16">
+          <div className="relative w-full mt-8 sm:mt-14 lg:mt-18">
             <div className="grid grid-cols-2 gap-3 sm:gap-6 lg:gap-8">
               {/* Left: Stage Photo */}
               <div className="relative aspect-[16/10] sm:aspect-[16/9.5] rounded-2xl sm:rounded-3xl overflow-hidden border border-[#E8DFDC]/80 shadow-sm bg-transparent">
@@ -867,8 +916,11 @@ export function Page3Projects() {
               </div>
             </div>
 
-            {/* Overlapping Cutout in Center */}
-            <div className="absolute left-1/2 -translate-x-1/2 bottom-0 h-[126%] sm:h-[134%] lg:h-[142%] aspect-[513/1209] z-10 pointer-events-none select-none filter drop-shadow-[0_14px_28px_rgba(58,42,40,0.25)] flex items-end justify-center">
+            {/* Overlapping Cutout in Center (Thu nhỏ lại 1 tí tránh chạm chữ phía trên) */}
+            <div
+              style={{ height: "116%", aspectRatio: "513 / 1209" }}
+              className="absolute left-1/2 -translate-x-1/2 bottom-0 z-10 pointer-events-none select-none filter drop-shadow-[0_14px_28px_rgba(58,42,40,0.25)] flex items-end justify-center"
+            >
               <Image
                 src="/source/cutout-marathon.webp"
                 alt="Phuong Nguyen Marathon Coordination"
@@ -882,10 +934,10 @@ export function Page3Projects() {
 
           {/* What I've Learned */}
           <div className="pt-6 sm:pt-8">
-            <h4 className="pdf-outline-title text-xl sm:text-2xl tracking-wider">
+            <h4 className="pdf-outline-title text-2xl sm:text-3xl md:text-[2.25rem] lg:text-[2.65rem] xl:text-[2.85rem] tracking-wider leading-none">
               WHAT I&apos;VE LEARNED
             </h4>
-            <span className="pdf-script text-2xl sm:text-3xl text-[#F2C4C4] block -mt-1 mb-2">
+            <span className="pdf-script text-2xl sm:text-3xl md:text-[2.25rem] lg:text-[2.65rem] xl:text-[2.85rem] text-[#E5A8AD] block -mt-1 sm:-mt-1.5 md:-mt-2 mb-2.5 sm:mb-3.5 leading-none select-none">
               from this project?
             </span>
             <div className="space-y-3 text-sm sm:text-base text-[#3E2F2D] leading-relaxed text-justify">
@@ -929,7 +981,7 @@ export function Page3Projects() {
               {/* Title & Project 05 & Badge block */}
               <div className="flex flex-col justify-between items-start min-w-0 self-stretch">
                 <div className="flex flex-col items-start min-w-0">
-                  <span className="font-pinyon pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#F2C4C4] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
+                  <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
                     Project 05:
                   </span>
                   <h3 className="pdf-outline-title text-[1.4rem] sm:text-[2.1rem] lg:text-[2.65rem] tracking-wide leading-none">
@@ -940,26 +992,15 @@ export function Page3Projects() {
                   <span className="px-5 py-1.5 rounded-full bg-[#F4EAEB] text-xs font-montserrat font-bold text-[#1E1716] tracking-wider uppercase inline-block">
                     ACADEMIC MARKETING COMPETITION
                   </span>
-                  <span className="text-xs text-[#7E6B69]">
-                    USSH · April 2026
-                  </span>
                 </div>
               </div>
-            </div>
-
-            {/* Achievement Pill */}
-            <div className="self-start sm:self-auto flex items-center gap-2 px-4 py-2 rounded-full bg-[#F4E8E7] border border-[#DCA3A8] shadow-xs mt-2">
-              <Award className="w-4 h-4 text-[#F2C4C4]" />
-              <span className="font-montserrat font-bold text-xs text-[#F2C4C4] tracking-wider uppercase">
-                Achievement: Top 4
-              </span>
             </div>
           </div>
 
           {/* Row 1: Left (Overview & Key Experience) + Right (Hình ảnh thứ 1: Stage Pitch & Defense - Full không cắt) */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Left: Overview & Key Experience (Cân xứng 50% độ rộng) */}
-            <div className="flex flex-col justify-between space-y-6 text-[#3E2F2D]">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center">
+            {/* Left: Overview & Key Experience (7/12 không gian rộng rãi cho text) */}
+            <div className="lg:col-span-7 flex flex-col justify-between space-y-6 text-[#3E2F2D] relative z-20">
               <div>
                 <h4 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.75rem] tracking-wider mb-2.5">
                   PROJECT OVERVIEW
@@ -973,37 +1014,23 @@ export function Page3Projects() {
               </div>
 
               <div>
-                <h4 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.75rem] tracking-wider mb-3">
+                <h4 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.75rem] tracking-wider mb-3 leading-none">
                   KEY EXPERIENCE
                 </h4>
-                <ul className="list-disc list-inside space-y-2 text-xs sm:text-sm text-[#4A3835] leading-relaxed">
-                  <li>
-                    Collaborated with team members throughout the competition.
-                  </li>
-                  <li>
-                    Applied marketing knowledge and creative thinking to develop
-                    project ideas.
-                  </li>
-                  <li>
-                    Contributed to project development and presentation.
-                  </li>
-                  <li>
-                    Worked collaboratively to complete competition requirements.
-                  </li>
-                </ul>
+                <InteractiveRoleList items={CULTURE_START_ROLE_ITEMS} />
               </div>
             </div>
 
-            {/* Right: Hình ảnh thứ 1 (Full ảnh không cắt) */}
-            <div className="flex flex-col justify-center">
+            {/* Right: Hình ảnh thứ 1 (Full ảnh không cắt, 5/12 căn lề phải tránh đè chữ) */}
+            <div className="lg:col-span-5 flex justify-center lg:justify-end w-full relative z-10">
               <div
-                className="group relative w-full aspect-[820/546] rounded-2xl overflow-hidden bg-transparent border border-[#E0D8D6] shadow-xs select-none"
+                className="group relative w-full max-w-[480px] aspect-[820/546] rounded-2xl overflow-hidden bg-transparent border border-[#E0D8D6] shadow-xs select-none"
               >
                 <Image
                   src={CULTURE_START_GALLERY[0].src}
                   alt={CULTURE_START_GALLERY[0].title}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 600px"
+                  sizes="(max-width: 1024px) 100vw, 480px"
                   className="object-contain group-hover:scale-105 transition-transform duration-500"
                 />
                 {/* Subtle hover overlay & caption tag */}
@@ -1179,7 +1206,7 @@ export function Page3Projects() {
               {/* Title & Badge block */}
               <div className="flex flex-col justify-center items-start min-w-0">
                 <div className="flex flex-col items-start min-w-0">
-                  <span className="font-pinyon pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#F2C4C4] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
+                  <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
                     Personal project:
                   </span>
                   <h3 className="pdf-outline-title text-[1.35rem] sm:text-[1.85rem] md:text-[2.25rem] lg:text-[2.65rem] tracking-wide leading-none whitespace-nowrap">
@@ -1197,8 +1224,8 @@ export function Page3Projects() {
 
           {/* 3-Column: Left Text, Center Phone, Right Text */}
           <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
-            {/* Left Column: Vision & Pillars */}
-            <div className="md:col-span-4 space-y-6 text-sm sm:text-base text-[#3E2F2D]">
+            {/* Left Column: Vision & Story */}
+            <div className="md:col-span-4 space-y-4 text-xs sm:text-sm text-[#3E2F2D]">
               <p className="text-[#4A3835] leading-relaxed text-justify">
                 I created a personal content channel on Threads to document
                 everyday moments, personal experiences, and thoughts through a
@@ -1211,11 +1238,45 @@ export function Page3Projects() {
                 spontaneous and authentic posts that reflect my personality and
                 connect naturally with audiences.
               </p>
+              <p className="text-[#4A3835] leading-relaxed text-justify">
+                My goal is to build a personal space where everyday experiences
+                become relatable content. The writing style is casual,
+                conversational, and authentic, allowing audiences to connect
+                with my thoughts and daily stories as if they were reading a
+                friend&apos;s diary.
+              </p>
+              <p className="text-[#4A3835] leading-relaxed text-justify">
+                The content prioritizes consistency, personal voice, and
+                audience interaction rather than overly polished or promotional
+                communication.
+              </p>
+            </div>
 
+            {/* Middle: Phone Mockup */}
+            <div className="md:col-span-4 flex justify-center">
+              <div
+                style={{ width: "264px", height: "528px" }}
+                className="group relative max-w-full aspect-[9/18] rounded-[2.5rem] p-2 bg-black border-4 border-[#3A2A28] shadow-xl overflow-hidden hover:scale-105 transition-transform"
+              >
+                <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-black">
+                  <Image
+                    src="/source/threads-profile.webp"
+                    alt="Threads feed"
+                    fill
+                    sizes="264px"
+                    priority
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Content Pillar & My Role */}
+            <div className="md:col-span-4 space-y-6 text-xs sm:text-sm text-[#3E2F2D]">
               <div>
-                <h5 className="pdf-outline-title text-sm tracking-wider mb-2.5">
+                <h4 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.75rem] tracking-wider mb-3 leading-none">
                   CONTENT PILLAR
-                </h5>
+                </h4>
                 <div className="flex flex-wrap gap-2 sm:gap-2.5">
                   {THREADS_PILLARS.map((pillar, idx) => {
                     const tiltAngles = [-4, 3.5, -3, 4, -3.5];
@@ -1247,75 +1308,12 @@ export function Page3Projects() {
                   })}
                 </div>
               </div>
-            </div>
-
-            {/* Middle: Phone Mockup */}
-            <div className="md:col-span-4 flex justify-center">
-              <div
-                className="group relative w-56 sm:w-60 aspect-[9/18] rounded-[2.5rem] p-2 bg-black border-4 border-[#3A2A28] shadow-xl overflow-hidden hover:scale-105 transition-transform"
-              >
-                <div className="relative w-full h-full rounded-[2rem] overflow-hidden bg-black">
-                  <Image
-                    src="/source/threads-profile.webp"
-                    alt="Threads feed"
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Right Column: Goal & My Role */}
-            <div className="md:col-span-4 space-y-6 text-xs sm:text-sm text-[#3E2F2D]">
-              <p className="text-[#4A3835] leading-relaxed text-justify">
-                My goal is to build a personal space where everyday experiences
-                become relatable content. The writing style is casual,
-                conversational, and authentic, allowing audiences to connect
-                with my thoughts and daily stories as if they were reading a
-                friend&apos;s diary.
-              </p>
-              <p className="text-[#4A3835] leading-relaxed text-justify">
-                The content prioritizes consistency, personal voice, and
-                audience interaction rather than overly polished or promotional
-                communication.
-              </p>
 
               <div>
-                <h5 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.75rem] tracking-wider mb-3">
+                <h4 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.75rem] tracking-wider mb-3 leading-none">
                   MY ROLE
-                </h5>
-                <div className="space-y-3">
-                  <div>
-                    <strong className="text-xs font-bold text-[#2E2220] block">
-                      1. CONTENT CREATION
-                    </strong>
-                    <ul className="list-disc list-inside space-y-1 text-xs text-[#4A3835] mt-1">
-                      <li>
-                        Develop and publish daily content based on personal
-                        experiences and everyday observations.
-                      </li>
-                      <li>
-                        Write short-form posts in a natural, conversational, and
-                        relatable tone.
-                      </li>
-                      <li>Explore trending topics and relatable discussions.</li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <strong className="text-xs font-bold text-[#2E2220] block">
-                      2. DEVELOPMENT
-                    </strong>
-                    <ul className="list-disc list-inside space-y-1 text-xs text-[#4A3835] mt-1">
-                      <li>
-                        Experiment with different writing styles, topics, and
-                        storytelling approaches.
-                      </li>
-                      <li>Identify content themes that resonate with audiences.</li>
-                      <li>Refine content direction based on performance.</li>
-                    </ul>
-                  </div>
-                </div>
+                </h4>
+                <InteractiveRoleList items={THREADS_ROLE_ITEMS} wrap />
               </div>
             </div>
           </div>

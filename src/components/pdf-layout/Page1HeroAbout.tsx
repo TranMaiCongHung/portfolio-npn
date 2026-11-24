@@ -77,7 +77,7 @@ export function Page1HeroAbout() {
                 NGUYEN
               </span>
               {/* Slanted Script 'portfolio' across NGUYEN */}
-              <span className="pdf-script text-[clamp(2.8rem,9vw,7.5rem)] text-[#F2C4C4] absolute -right-4 sm:-right-8 -bottom-3 sm:-bottom-5 transform rotate-[-8deg] pointer-events-none drop-shadow-sm">
+              <span className="pdf-script-portfolio text-[clamp(2.8rem,9vw,7.5rem)] absolute -right-4 sm:-right-8 -bottom-3 sm:-bottom-5 transform rotate-[-8deg] pointer-events-none drop-shadow-sm select-none">
                 portfolio
               </span>
             </div>
@@ -150,7 +150,7 @@ export function Page1HeroAbout() {
 
             {/* Education Section */}
             <div className="w-full pt-1">
-              <h3 className="pdf-script text-3xl sm:text-4xl text-[#F2C4C4] mb-1">
+              <h3 className="pdf-script text-3xl sm:text-4xl text-[#E5A8AD] mb-1 select-none leading-tight">
                 education
               </h3>
               <p className="font-bold text-sm sm:text-base text-[#2E2220]">
@@ -164,7 +164,7 @@ export function Page1HeroAbout() {
 
             {/* Tools Section */}
             <div className="w-full">
-              <h3 className="pdf-script text-3xl sm:text-4xl text-[#F2C4C4] mb-2.5">
+              <h3 className="pdf-script text-3xl sm:text-4xl text-[#E5A8AD] mb-2.5 select-none leading-tight">
                 tools
               </h3>
               {/* Standalone transparent icons (no background card), enlarged with hover animations */}
@@ -194,7 +194,7 @@ export function Page1HeroAbout() {
 
             {/* Skills Section */}
             <div className="w-full">
-              <h3 className="pdf-script text-3xl sm:text-4xl text-[#F2C4C4] mb-2.5">
+              <h3 className="pdf-script text-3xl sm:text-4xl text-[#E5A8AD] mb-2.5 select-none leading-tight">
                 skills
               </h3>
               <div className="flex flex-col gap-2 w-full">
@@ -224,12 +224,12 @@ export function Page1HeroAbout() {
           {/* ------------------------------------------------------- */}
           <div className="w-full flex flex-col justify-between">
             <div className="flex flex-col gap-5 sm:gap-6">
-              {/* Main Greeting */}
+              {/* Main Greeting matching PDF Page 1 */}
               <div>
-                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black tracking-tight text-[#2E2220] flex items-center gap-2">
+                <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black tracking-tight text-[#2E2220] flex items-baseline gap-2 sm:gap-3">
                   <span>HI! I&apos;M</span>
-                  <span className="pdf-outline-rose text-3xl sm:text-4xl lg:text-5xl font-black">
-                    NGUYEN
+                  <span className="pdf-script text-4xl sm:text-5xl lg:text-6xl text-[#E5A8AD] font-normal tracking-wide select-none">
+                    Nguyen
                   </span>
                 </h2>
               </div>
@@ -276,7 +276,7 @@ export function Page1HeroAbout() {
 
               {/* Work Experiences */}
               <div className="pt-1">
-                <h3 className="pdf-script text-3xl sm:text-4xl text-[#F2C4C4] mb-3">
+                <h3 className="pdf-script text-3xl sm:text-4xl text-[#E5A8AD] mb-3 select-none leading-tight">
                   work experiences
                 </h3>
                 <div className="space-y-3.5">

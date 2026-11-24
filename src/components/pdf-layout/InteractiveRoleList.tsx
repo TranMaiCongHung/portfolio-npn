@@ -11,6 +11,7 @@ export interface RoleItem {
 interface InteractiveRoleListProps {
   items?: RoleItem[];
   className?: string;
+  wrap?: boolean;
 }
 
 const DEFAULT_ITEMS: RoleItem[] = [
@@ -35,6 +36,7 @@ const DEFAULT_ITEMS: RoleItem[] = [
 export function InteractiveRoleList({
   items = DEFAULT_ITEMS,
   className = "",
+  wrap = false,
 }: InteractiveRoleListProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
@@ -57,7 +59,7 @@ export function InteractiveRoleList({
     if (dist === 0) {
       // Hovered item: nhô ra thanh ngang rõ rệt hơn, sắc hồng rực rỡ
       return {
-        width: 70,
+        width: 50,
         color: "#F2C4C4",
         opacity: 1,
         numColor: "#F2C4C4",
@@ -70,7 +72,7 @@ export function InteractiveRoleList({
     if (dist === 1) {
       // Dòng liền kề: bị tác động theo hiệu ứng sóng lượn (dài hơn một chút)
       return {
-        width: 50,
+        width: 40,
         color: "#A8535E",
         opacity: 0.85,
         numColor: "#A8535E",
@@ -83,7 +85,7 @@ export function InteractiveRoleList({
     if (dist === 2) {
       // Dòng cách 2 vị trí: tác động rất nhẹ
       return {
-        width: 38,
+        width: 34,
         color: "#C4727E",
         opacity: 0.65,
         numColor: "#B5737C",
@@ -151,15 +153,15 @@ export function InteractiveRoleList({
 
         return (
           <React.Fragment key={item.num}>
-            {/* Main Interactive Row - Không bao giờ xuống dòng khi hover */}
+            {/* Main Interactive Row */}
             <motion.div
               onMouseEnter={() => setHoveredIndex(index)}
               onClick={() => setHoveredIndex(index === hoveredIndex ? null : index)}
-              className="group relative cursor-pointer py-2 sm:py-2.5 flex items-center select-none min-h-[42px]"
+              className={`group relative cursor-pointer py-1.5 sm:py-2 flex ${wrap ? "items-start" : "items-center"} select-none min-h-[38px]`}
             >
               {/* Horizontal Indicator Line */}
               <motion.div
-                className="h-[2px] rounded-full flex-shrink-0 mr-2.5 sm:mr-3.5"
+                className={`h-[2px] rounded-full flex-shrink-0 mr-2.5 sm:mr-3.5 ${wrap ? "mt-2 sm:mt-2.5" : ""}`}
                 animate={{
                   width: metrics.width,
                   backgroundColor: metrics.color,
@@ -175,7 +177,7 @@ export function InteractiveRoleList({
 
               {/* Number (01, 02...) with monospace slashed zero */}
               <motion.span
-                className="font-mono text-sm sm:text-base tracking-wider tabular-nums slashed-zero mr-2.5 sm:mr-3.5 flex-shrink-0"
+                className={`font-mono text-sm sm:text-base tracking-wider tabular-nums slashed-zero mr-2.5 sm:mr-3.5 flex-shrink-0 ${wrap ? "mt-0.5 sm:mt-1" : ""}`}
                 animate={{
                   color: metrics.numColor,
                   fontWeight: metrics.numWeight,
@@ -190,9 +192,9 @@ export function InteractiveRoleList({
                 {item.num}
               </motion.span>
 
-              {/* Text Description - Khóa md:whitespace-nowrap để tuyệt đối không bị xuống dòng */}
+              {/* Text Description */}
               <motion.span
-                className="text-xs sm:text-[13.5px] md:text-[14px] leading-relaxed transition-colors duration-200 md:whitespace-nowrap"
+                className={`text-xs sm:text-[13px] md:text-[13.5px] leading-snug transition-colors duration-200 ${wrap ? "whitespace-normal text-left" : "md:whitespace-nowrap"}`}
                 animate={{
                   color: metrics.textColor,
                 }}

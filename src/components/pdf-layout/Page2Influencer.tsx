@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Play, Eye, ArrowRight } from "lucide-react";
+import { Play, Eye, ArrowRight, Volume2, VolumeX } from "lucide-react";
 
 // Brand Collaborations Logos
 import logoMega from "@/brands/mega-wecare@2x.png";
@@ -33,6 +33,7 @@ const TIKTOK_VIDEOS = [
     views: "14.4K",
     creator: "KOC Booking",
     poster: "/source/s01-video-1.webp",
+    videoSrc: "/videos/video-1.mp4",
   },
   {
     id: "v2",
@@ -40,6 +41,7 @@ const TIKTOK_VIDEOS = [
     views: "24.2K",
     creator: "KOC Booking",
     poster: "/source/s01-video-2.webp",
+    videoSrc: "/videos/video-2.mp4",
   },
   {
     id: "v3",
@@ -47,6 +49,7 @@ const TIKTOK_VIDEOS = [
     views: "29.2K",
     creator: "KOC Booking",
     poster: "/source/s01-video-3.webp",
+    videoSrc: "/videos/video-3.mp4",
   },
   {
     id: "v4",
@@ -54,8 +57,145 @@ const TIKTOK_VIDEOS = [
     views: "17.9K",
     creator: "KOC Booking",
     poster: "/source/s01-video-4.webp",
+    videoSrc: "/videos/video-4.mp4",
   },
 ];
+
+interface TikTokVideoItem {
+  id: string;
+  title: string;
+  views: string;
+  creator: string;
+  poster: string;
+  videoSrc: string;
+}
+
+function TikTokVideoCard({ video }: { video: TikTokVideoItem }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [hasError, setHasError] = useState(false);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const vid = videoRef.current;
+    if (!container || !vid) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            vid.muted = true;
+            const playPromise = vid.play();
+            if (playPromise !== undefined) {
+              playPromise
+                .then(() => setIsPlaying(true))
+                .catch(() => {});
+            }
+          } else {
+            vid.pause();
+            setIsPlaying(false);
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, []);
+
+  const handleTogglePlay = () => {
+    const vid = videoRef.current;
+    if (!vid) return;
+    if (vid.paused) {
+      vid.play().then(() => setIsPlaying(true)).catch(() => {});
+    } else {
+      vid.pause();
+      setIsPlaying(false);
+    }
+  };
+
+  const handleToggleMute = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    const vid = videoRef.current;
+    if (!vid) return;
+    vid.muted = !vid.muted;
+    setIsMuted(vid.muted);
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      onClick={handleTogglePlay}
+      className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-black/5 border border-[#D5CFCF] shadow-sm select-none cursor-pointer"
+    >
+      {/* HTML5 Video element with autoplay on scroll */}
+      <video
+        ref={videoRef}
+        poster={video.poster}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        onError={() => setHasError(true)}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      >
+        <source src={video.videoSrc} type={video.videoSrc.endsWith(".mov") ? "video/mp4; codecs=hvc1" : "video/mp4"} />
+        <source src={video.videoSrc} type={video.videoSrc.endsWith(".mov") ? "video/quicktime" : "video/mp4"} />
+        <source src={video.videoSrc} />
+      </video>
+
+      {/* Fallback Image if video error */}
+      {hasError && (
+        <Image
+          src={video.poster}
+          alt={video.title}
+          fill
+          sizes="(max-width: 640px) 45vw, 220px"
+          className="object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      )}
+
+      {/* View Badge */}
+      <div className="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] sm:text-xs text-white font-semibold flex items-center gap-1 pointer-events-none">
+        <Eye className="w-3 h-3 text-[#DCA3A8]" />
+        <span className="font-bevan bevan-regular tracking-wide">{video.views}</span>
+      </div>
+
+      {/* Sound toggle button */}
+      <button
+        type="button"
+        onClick={handleToggleMute}
+        aria-label={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
+        className="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity"
+      >
+        {isMuted ? (
+          <VolumeX className="w-3.5 h-3.5 text-white/80" />
+        ) : (
+          <Volume2 className="w-3.5 h-3.5 text-[#E5A8AD]" />
+        )}
+      </button>
+
+      {/* Subtle play indicator when paused */}
+      {!isPlaying && !hasError && (
+        <div className="absolute inset-0 z-10 flex items-center justify-center pointer-events-none bg-black/20 transition-opacity">
+          <div className="w-10 h-10 rounded-full bg-black/60 backdrop-blur-md flex items-center justify-center text-white">
+            <Play className="w-5 h-5 ml-0.5 fill-current" />
+          </div>
+        </div>
+      )}
+
+      {/* Bottom Title */}
+      <div className="absolute inset-x-0 bottom-0 z-10 p-2.5 bg-gradient-to-t from-black/85 via-black/40 to-transparent pointer-events-none">
+        <p className="text-[11px] sm:text-xs text-white font-medium line-clamp-2 leading-tight">
+          {video.title}
+        </p>
+      </div>
+    </div>
+  );
+}
 
 const ROLE_WORKFLOW_STEPS = [
   {
@@ -155,7 +295,7 @@ export function Page2Influencer() {
         {/* PROJECT 01 HEADER matching PDF Page 2                     */}
         {/* ========================================================= */}
         <div className="flex flex-col items-start">
-          <span className="font-pinyon pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#F2C4C4] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none">
+          <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none">
             Project 01:
           </span>
           <h2 className="pdf-outline-title text-[1.5rem] sm:text-[2.35rem] lg:text-[3rem] tracking-wide leading-none">
@@ -647,31 +787,7 @@ export function Page2Influencer() {
           {/* 4 Vertical Video Cards */}
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
             {TIKTOK_VIDEOS.map((video) => (
-              <div
-                key={video.id}
-                className="group relative aspect-[9/16] rounded-2xl overflow-hidden bg-transparent border border-[#D5CFCF] shadow-sm select-none"
-              >
-                <Image
-                  src={video.poster}
-                  alt={video.title}
-                  fill
-                  sizes="(max-width: 640px) 45vw, 220px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-
-                {/* View Badge */}
-                <div className="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 rounded-full bg-black/60 backdrop-blur-md text-[10px] sm:text-xs text-white font-semibold flex items-center gap-1">
-                  <Eye className="w-3 h-3 text-[#DCA3A8]" />
-                  <span className="font-bevan bevan-regular tracking-wide">{video.views}</span>
-                </div>
-
-                {/* Bottom Title */}
-                <div className="absolute inset-x-0 bottom-0 p-2.5 bg-gradient-to-t from-black/85 via-black/40 to-transparent">
-                  <p className="text-[11px] sm:text-xs text-white font-medium line-clamp-2 leading-tight">
-                    {video.title}
-                  </p>
-                </div>
-              </div>
+              <TikTokVideoCard key={video.id} video={video} />
             ))}
           </div>
         </div>

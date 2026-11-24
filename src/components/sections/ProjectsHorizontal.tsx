@@ -16,6 +16,7 @@ export interface SceneCardData {
   statValue: string;
   statLabel: string;
   image: string;
+  imageClassName?: string;
   targetId: string;
 }
 
@@ -83,7 +84,8 @@ export const SIX_SCENES: SceneCardData[] = [
     description: "Everyday stories, creative marketing journey, and lifestyle on Threads.",
     statValue: "5.5K+",
     statLabel: "followers & active community reach",
-    image: "/source/threads_showcase.webp",
+    image: "/source/threads-profile.webp",
+    imageClassName: "object-top",
     targetId: "project-threads",
   },
 ];
@@ -291,8 +293,13 @@ export function ProjectsHorizontal() {
               className="p-5 rounded-3xl bg-white border border-[#E8DFDC] shadow-md hover:border-[#C9707B] transition-all cursor-pointer flex flex-col justify-between"
             >
               <div className="relative w-full h-[220px] rounded-2xl overflow-hidden bg-black/5 mb-4">
-                <Image src={scene.image} alt={scene.title} fill className="object-cover" />
-                <span className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-black/60 text-white text-[10px] font-heading font-bold uppercase">
+                <Image
+                  src={scene.image}
+                  alt={scene.title}
+                  fill
+                  className={`object-cover ${scene.imageClassName || ""}`}
+                />
+                <span className="absolute top-2.5 left-2.5 px-3 py-0.5 rounded-full bg-black/60 text-white text-base font-pinyon pdf-script normal-case leading-none select-none">
                   {scene.kicker}
                 </span>
               </div>
@@ -441,7 +448,7 @@ export function ProjectsHorizontal() {
                   alt={scene.title}
                   fill
                   sizes="(min-width: 640px) 295px, 240px"
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className={`object-cover group-hover:scale-105 transition-transform duration-500 ${scene.imageClassName || ""}`}
                 />
                 {/* Top Scene Kicker Badge */}
                 <div className="absolute top-2.5 left-2.5 z-10 px-3 py-0.5 rounded-full bg-black/65 backdrop-blur-md text-base sm:text-lg font-pinyon pdf-script text-white normal-case leading-none select-none">
