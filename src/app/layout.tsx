@@ -1,6 +1,15 @@
+// Reload trigger
 import type { Metadata } from "next";
-import { Bebas_Neue, Lexend, Pinyon_Script, Montserrat, Bevan } from "next/font/google";
+import { Bebas_Neue, Lexend, Pinyon_Script, Montserrat, Bevan, Great_Vibes } from "next/font/google";
+import "./fonts.css";
 import "./globals.css";
+
+const greatVibes = Great_Vibes({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-great-vibes",
+  display: "swap",
+});
 
 const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -50,7 +59,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${montserrat.variable} ${lexend.variable} ${pinyonScript.variable} ${bevan.variable} h-full scroll-smooth`}
+      className={`${bebasNeue.variable} ${montserrat.variable} ${lexend.variable} ${pinyonScript.variable} ${greatVibes.variable} ${bevan.variable} h-full scroll-smooth`}
     >
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -60,7 +69,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&family=Lexend:wght@100..900&family=Pinyon+Script&display=swap"
+          href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700;800;900&family=Lexend:wght@100..900&family=Great+Vibes&family=Alex+Brush&family=Allura&family=Pinyon+Script&family=Monsieur+La+Doulaise&family=Lavishly+Yours&display=swap"
           rel="stylesheet"
         />
         <style

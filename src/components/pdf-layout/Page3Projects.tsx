@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { ExternalLink, ArrowRight } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import { InteractiveRoleList, RoleItem } from "./InteractiveRoleList";
 import { motion } from "motion/react";
 import { AnimatedCounter } from "@/components/common/AnimatedCounter";
@@ -64,7 +64,6 @@ const THREADS_PILLARS = [
   "Personal Journey",
   "Personal Interests",
   "Thoughts & Relatable Stories",
-  "University Life",
 ];
 
 const VFIS_ROLE_STEPS = [
@@ -202,7 +201,16 @@ export function Page3Projects() {
               {/* Title & Project 02 & Badge block - Pushed to the right and aligned top and bottom with the logo */}
               <div className="flex flex-col justify-between items-start min-w-0 self-stretch">
                 <div className="flex flex-col items-start min-w-0">
-                  <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
+                  <span
+                    className="text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1 inline-block"
+                    style={{
+                      fontFamily: "'SloopScriptTitle', var(--font-script), 'Pinyon Script', cursive",
+                      fontWeight: 400,
+                      color: "#E5A8AD",
+                      WebkitTextStroke: "1.2px #2E2220",
+                      paintOrder: "stroke fill",
+                    }}
+                  >
                     Project 02:
                   </span>
                   <h3 className="pdf-outline-title text-[1.4rem] sm:text-[2.1rem] lg:text-[2.65rem] tracking-wide leading-none">
@@ -585,7 +593,16 @@ export function Page3Projects() {
               {/* Title & Project 03 & Badge block - Pushed to the right and aligned top and bottom with the logo */}
               <div className="flex flex-col justify-between items-start min-w-0 self-stretch">
                 <div className="flex flex-col items-start min-w-0">
-                  <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
+                  <span
+                    className="text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1 inline-block"
+                    style={{
+                      fontFamily: "'SloopScriptTitle', var(--font-script), 'Pinyon Script', cursive",
+                      fontWeight: 400,
+                      color: "#E5A8AD",
+                      WebkitTextStroke: "1.2px #2E2220",
+                      paintOrder: "stroke fill",
+                    }}
+                  >
                     Project 03:
                   </span>
                   <h3 className="pdf-outline-title text-[1.4rem] sm:text-[2.1rem] lg:text-[2.65rem] tracking-wide leading-none">
@@ -732,30 +749,8 @@ export function Page3Projects() {
             <div className="grid grid-cols-1 md:grid-cols-[460px_1fr] lg:grid-cols-[520px_1fr] xl:grid-cols-[560px_1fr] gap-8 sm:gap-10 lg:gap-14 xl:gap-16 items-center">
               {/* Left: Cutout Figure Sitting Directly on Top of Title */}
               <div className="relative flex flex-col items-center justify-center select-none w-full">
-                {/* Cutout Photo (Người ngồi tiếp xúc ngay trên đầu chữ) with Floating Elements */}
+                {/* Cutout Photo (Người ngồi tiếp xúc ngay trên đầu chữ) */}
                 <div className="relative w-44 sm:w-52 md:w-60 lg:w-64 h-64 sm:h-76 md:h-84 lg:h-[360px] z-10 -mb-1 sm:-mb-1.5">
-                  {/* 1. Floating Pastel Moon and Star (203) on the Left */}
-                  <div className="absolute -left-6 sm:-left-10 md:-left-12 lg:-left-14 top-6 sm:top-8 md:top-10 z-20 w-12 sm:w-16 md:w-20 aspect-[284/316] pointer-events-none animate-float-camera filter drop-shadow-md">
-                    <Image
-                      src="/source/203.png"
-                      alt="Pastel Moon and Star (203)"
-                      fill
-                      sizes="(max-width: 640px) 48px, (max-width: 768px) 64px, 80px"
-                      className="object-contain"
-                    />
-                  </div>
-
-                  {/* 2. Floating Crystal Stars (202) on the Right */}
-                  <div className="absolute -right-8 sm:-right-12 md:-right-16 lg:-right-20 top-16 sm:top-20 md:top-24 z-20 w-12 sm:w-16 md:w-20 aspect-[284/316] pointer-events-none animate-float-flower filter drop-shadow-sm">
-                    <Image
-                      src="/source/202.png"
-                      alt="Crystal Stars (202)"
-                      fill
-                      sizes="(max-width: 640px) 48px, (max-width: 768px) 64px, 80px"
-                      className="object-contain"
-                    />
-                  </div>
-
                   <Image
                     src="/source/cutout-sitting.webp"
                     alt="Nguyen sitting"
@@ -824,7 +819,16 @@ export function Page3Projects() {
               {/* Title & Project 04 & Badge block */}
               <div className="flex flex-col justify-between items-start min-w-0 self-stretch">
                 <div className="flex flex-col items-start min-w-0">
-                  <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
+                  <span
+                    className="text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1 inline-block"
+                    style={{
+                      fontFamily: "'SloopScriptTitle', var(--font-script), 'Pinyon Script', cursive",
+                      fontWeight: 400,
+                      color: "#E5A8AD",
+                      WebkitTextStroke: "1.2px #2E2220",
+                      paintOrder: "stroke fill",
+                    }}
+                  >
                     Project 04:
                   </span>
                   <h3 className="pdf-outline-title text-[1.4rem] sm:text-[2.1rem] lg:text-[2.65rem] tracking-wide leading-none">
@@ -981,7 +985,16 @@ export function Page3Projects() {
               {/* Title & Project 05 & Badge block */}
               <div className="flex flex-col justify-between items-start min-w-0 self-stretch">
                 <div className="flex flex-col items-start min-w-0">
-                  <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
+                  <span
+                    className="text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1 inline-block"
+                    style={{
+                      fontFamily: "'SloopScriptTitle', var(--font-script), 'Pinyon Script', cursive",
+                      fontWeight: 400,
+                      color: "#E5A8AD",
+                      WebkitTextStroke: "1.2px #2E2220",
+                      paintOrder: "stroke fill",
+                    }}
+                  >
                     Project 05:
                   </span>
                   <h3 className="pdf-outline-title text-[1.4rem] sm:text-[2.1rem] lg:text-[2.65rem] tracking-wide leading-none">
@@ -998,9 +1011,9 @@ export function Page3Projects() {
           </div>
 
           {/* Row 1: Left (Overview & Key Experience) + Right (Hình ảnh thứ 1: Stage Pitch & Defense - Full không cắt) */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 xl:gap-14 items-center">
-            {/* Left: Overview & Key Experience (7/12 không gian rộng rãi cho text) */}
-            <div className="lg:col-span-7 flex flex-col justify-between space-y-6 text-[#3E2F2D] relative z-20">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-8 lg:gap-10 xl:gap-12 items-center">
+            {/* Left: Overview & Key Experience */}
+            <div className="flex flex-col justify-between space-y-6 text-[#3E2F2D] relative z-20">
               <div>
                 <h4 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.75rem] tracking-wider mb-2.5">
                   PROJECT OVERVIEW
@@ -1021,16 +1034,16 @@ export function Page3Projects() {
               </div>
             </div>
 
-            {/* Right: Hình ảnh thứ 1 (Full ảnh không cắt, 5/12 căn lề phải tránh đè chữ) */}
-            <div className="lg:col-span-5 flex justify-center lg:justify-end w-full relative z-10">
+            {/* Right: Hình ảnh thứ 1 (Mở rộng tỷ lệ ảnh để cân đối 3 hàng Overview bên trái) */}
+            <div className="flex justify-center lg:justify-end w-full relative z-10">
               <div
-                className="group relative w-full max-w-[480px] aspect-[820/546] rounded-2xl overflow-hidden bg-transparent border border-[#E0D8D6] shadow-xs select-none"
+                className="group relative w-full max-w-[660px] aspect-[820/546] rounded-2xl overflow-hidden bg-transparent border border-[#E0D8D6] shadow-xs select-none"
               >
                 <Image
                   src={CULTURE_START_GALLERY[0].src}
                   alt={CULTURE_START_GALLERY[0].title}
                   fill
-                  sizes="(max-width: 1024px) 100vw, 480px"
+                  sizes="(max-width: 1024px) 100vw, 660px"
                   className="object-contain group-hover:scale-105 transition-transform duration-500"
                 />
                 {/* Subtle hover overlay & caption tag */}
@@ -1163,13 +1176,13 @@ export function Page3Projects() {
             {/* Hàng 2 (Bottom Row): Đoạn văn 2 góc trái & Đoạn văn 3 góc phải - Cùng baseline ngang */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12 items-start">
               {/* Góc 3 (Bottom-Left): Nội dung 2 */}
-              <div className="text-sm sm:text-base text-[#3E2F2D] leading-relaxed text-justify">
+              <div className="text-sm sm:text-base text-[#3E2F2D] leading-relaxed text-justify tracking-[-0.01em]">
                 <p>
                   Working through the competition also helped me appreciate the
                   value of teamwork. Listening to different perspectives,
                   exchanging ideas, and learning how to approach challenges
                   together showed me that a good outcome often comes from
-                  collaboration rather than individual effort.
+                  collaboration rather than individual&nbsp;effort.
                 </p>
               </div>
 
@@ -1189,36 +1202,146 @@ export function Page3Projects() {
         {/* PERSONAL PROJECT: “PHƯƠNG NGUYÊN THƯỜNG NHẬT”            */}
         {/* ========================================================= */}
         <div id="project-threads" className="scroll-mt-20 flex flex-col gap-8 pt-8 border-t border-[#E8DFDC]">
-          {/* Header */}
-          <div className="flex items-center justify-between gap-6 pb-4 border-b border-[#E8DFDC]">
-            <div className="flex items-center gap-6 sm:gap-8 lg:gap-10 xl:gap-12">
-              {/* Enlarged Threads Logo (Bo tròn mềm mại) */}
-              <div className="relative w-28 h-28 sm:w-36 sm:h-36 md:w-40 md:h-40 lg:w-[172px] lg:h-[172px] flex-shrink-0 flex items-center justify-center bg-black rounded-2xl sm:rounded-3xl md:rounded-[36px] overflow-hidden shadow-sm">
+          {/* Header matching reference design: Left (Title), Center (Profile + Stats + Arrow), Right (Threads Icon) */}
+          <div className="flex flex-col lg:flex-row lg:items-center gap-10 lg:gap-10 xl:gap-14 pb-6">
+            {/* Left: Script Title & Outlined Vietnamese Title */}
+            <div className="flex flex-col items-start flex-shrink-0">
+              <span
+                className="pdf-script-rose-outline text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 relative z-10 select-none leading-none pl-1 inline-block"
+                style={{
+                  WebkitTextStroke: "1.2px #2E2220",
+                  paintOrder: "stroke fill",
+                }}
+              >
+                Personal project
+              </span>
+              <h3 className="pdf-outline-title text-[1.2rem] sm:text-[1.65rem] md:text-[1.95rem] lg:text-[2.15rem] xl:text-[2.35rem] tracking-wide leading-tight">
+                &ldquo;PHƯƠNG NGUYÊN
+                <br />
+                THƯỜNG NHẬT&rdquo;
+              </h3>
+            </div>
+
+            {/* Center & Right Group: Profile Widget (pushed left closer to title) + Threads App Icon (nudged left from edge) */}
+            <div className="flex-1 flex flex-wrap sm:flex-nowrap items-center justify-between gap-6 sm:gap-8 lg:pr-10 xl:pr-14">
+              {/* Profile Widget: Avatar + @ursonlyonee + 115 FOLLOWERS / 121,000 VIEWS + Curved Arrow */}
+              <a
+                href="https://www.threads.net/@ursonlyonee"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex items-center select-none cursor-pointer"
+                title="Click to view @ursonlyonee on Threads"
+              >
+                <div className="flex items-center gap-4 sm:gap-5">
+                  {/* Circular Avatar */}
+                  <div className="relative w-24 h-24 sm:w-28 sm:h-28 lg:w-[120px] lg:h-[120px] rounded-full overflow-hidden flex-shrink-0 border border-[#E8DFDC] shadow-sm bg-[#2E2220]">
+                    <Image
+                      src="/source/threads-portrait.webp"
+                      alt="@ursonlyonee"
+                      fill
+                      sizes="120px"
+                      className="object-cover object-[50%_20%] group-hover:scale-105 transition-transform duration-300"
+                    />
+                  </div>
+
+                  {/* Handle & Stats */}
+                  <div className="flex flex-col items-start">
+                    <span
+                      className="font-montserrat font-extrabold normal-case text-base sm:text-lg lg:text-[1.2rem] tracking-wide leading-none mb-2.5"
+                      style={{
+                        color: "#FFFFFF",
+                        WebkitTextStroke: "1.1px #241E1E",
+                        paintOrder: "stroke fill",
+                      }}
+                    >
+                      @ursonlyonee
+                    </span>
+
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      {/* 115 FOLLOWERS */}
+                      <div className="flex flex-col items-center">
+                        <span
+                          className="font-montserrat font-extrabold text-xl sm:text-2xl lg:text-[1.65rem] leading-none"
+                          style={{
+                            color: "#FFFFFF",
+                            WebkitTextStroke: "1.2px #241E1E",
+                            paintOrder: "stroke fill",
+                          }}
+                        >
+                          115
+                        </span>
+                        <span className="mt-1.5 px-2.5 sm:px-3 py-1 rounded-md bg-[#888585] text-white font-montserrat font-bold text-[9px] sm:text-[10px] tracking-wider uppercase leading-none whitespace-nowrap">
+                          FOLLOWERS
+                        </span>
+                      </div>
+
+                      {/* 121,000 VIEWS */}
+                      <div className="flex flex-col items-center">
+                        <span
+                          className="font-montserrat font-extrabold text-xl sm:text-2xl lg:text-[1.65rem] leading-none"
+                          style={{
+                            color: "#FFFFFF",
+                            WebkitTextStroke: "1.2px #241E1E",
+                            paintOrder: "stroke fill",
+                          }}
+                        >
+                          121,000
+                        </span>
+                        <span className="mt-1.5 px-3 sm:px-4 py-1 rounded-md bg-[#888585] text-white font-montserrat font-bold text-[9px] sm:text-[10px] tracking-wider uppercase leading-none whitespace-nowrap">
+                          VIEWS
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Curved Hand-Drawn Arrow + (click here to view account) - positioned below avatar so Threads icon centers with avatar */}
+                <div className="absolute top-full left-1 sm:left-2 -mt-3 flex flex-col items-start pointer-events-none">
+                  <svg
+                    width="34"
+                    height="34"
+                    viewBox="0 0 36 36"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="text-[#4A3835] group-hover:text-[#C9707B] transition-colors -mb-0.5 ml-3"
+                    aria-hidden="true"
+                  >
+                    <path
+                      d="M14 31C5 26 4 15 11 7"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M6.5 8.5L11.5 6.5L12.5 11.8"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <span className="text-xs sm:text-[13px] text-[#4A3835] group-hover:text-[#C9707B] transition-colors leading-none whitespace-nowrap">
+                    (click here to view account)
+                  </span>
+                </div>
+              </a>
+
+              {/* Far Right: Threads App Icon (centered with avatar, slightly smaller) */}
+              <a
+                href="https://www.threads.net/@ursonlyonee"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Visit @ursonlyonee on Threads"
+                className="relative w-20 h-20 sm:w-28 sm:h-28 md:w-32 md:h-32 lg:w-[132px] lg:h-[132px] flex-shrink-0 rounded-[20px] sm:rounded-[26px] overflow-hidden shadow-sm hover:scale-105 transition-transform duration-300"
+              >
                 <Image
                   src="/source/icon-threads.webp"
                   alt="Threads"
-                  width={84}
-                  height={84}
+                  fill
+                  sizes="132px"
                   className="object-contain"
                 />
-              </div>
-
-              {/* Title & Badge block */}
-              <div className="flex flex-col justify-center items-start min-w-0">
-                <div className="flex flex-col items-start min-w-0">
-                  <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1">
-                    Personal project:
-                  </span>
-                  <h3 className="pdf-outline-title text-[1.35rem] sm:text-[1.85rem] md:text-[2.25rem] lg:text-[2.65rem] tracking-wide leading-none whitespace-nowrap">
-                    &ldquo;PHUONG NGUYEN THUONG NHAT&rdquo;
-                  </h3>
-                </div>
-                <div className="mt-3 sm:mt-4">
-                  <span className="px-5 py-1.5 rounded-full bg-[#F4EAEB] text-xs font-montserrat font-bold text-[#1E1716] tracking-wider uppercase inline-block">
-                    PERSONAL BRANDING & CONTENT CREATION
-                  </span>
-                </div>
-              </div>
+              </a>
             </div>
           </div>
 
@@ -1320,7 +1443,7 @@ export function Page3Projects() {
 
           {/* Key Metrics / Result Section - 1 Top (Centered) & 2 Bottom (Symmetrical) with Left-Aligned Numbers & Single-Line Labels */}
           <div>
-            <span className="pdf-script-rose-outline text-4xl sm:text-5xl md:text-6xl block mb-2 sm:mb-4 pl-1 sm:pl-2 select-none leading-none">
+            <span className="pdf-script-rose-outline text-6xl sm:text-7xl md:text-[5.25rem] lg:text-[6.25rem] xl:text-[7rem] block mb-2 sm:mb-4 pl-1 sm:pl-2 select-none leading-none">
               result
             </span>
             <div className="w-full pt-4 sm:pt-6 pb-2 flex flex-col items-center">
@@ -1395,17 +1518,6 @@ export function Page3Projects() {
           </div>
         </div>
 
-        {/* Next Arrow to Contact / Page 4 */}
-        <div className="self-end pt-4">
-          <a
-            href="#page-4"
-            aria-label="Next Page"
-            className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-[#EAECEE] hover:bg-[#DCA3A8] hover:text-white border border-[#D0C8C6] text-xs font-semibold text-[#2E2220] transition-all hover:scale-105"
-          >
-            <span>Closing: Thank You & Contact</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </a>
-        </div>
       </div>
     </section>
   );

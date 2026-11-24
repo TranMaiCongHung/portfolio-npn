@@ -150,7 +150,7 @@ export function Page1HeroAbout() {
 
             {/* Education Section */}
             <div className="w-full pt-1">
-              <h3 className="pdf-script text-3xl sm:text-4xl text-[#E5A8AD] mb-1 select-none leading-tight">
+              <h3 className="pdf-script-rose-outline text-3xl sm:text-4xl mb-1 select-none leading-tight">
                 education
               </h3>
               <p className="font-bold text-sm sm:text-base text-[#2E2220]">
@@ -164,7 +164,7 @@ export function Page1HeroAbout() {
 
             {/* Tools Section */}
             <div className="w-full">
-              <h3 className="pdf-script text-3xl sm:text-4xl text-[#E5A8AD] mb-2.5 select-none leading-tight">
+              <h3 className="pdf-script-rose-outline text-3xl sm:text-4xl mb-2.5 select-none leading-tight">
                 tools
               </h3>
               {/* Standalone transparent icons (no background card), enlarged with hover animations */}
@@ -194,7 +194,7 @@ export function Page1HeroAbout() {
 
             {/* Skills Section */}
             <div className="w-full">
-              <h3 className="pdf-script text-3xl sm:text-4xl text-[#E5A8AD] mb-2.5 select-none leading-tight">
+              <h3 className="pdf-script-rose-outline text-3xl sm:text-4xl mb-2.5 select-none leading-tight">
                 skills
               </h3>
               <div className="flex flex-col gap-2 w-full">
@@ -228,7 +228,7 @@ export function Page1HeroAbout() {
               <div>
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-montserrat font-black tracking-tight text-[#2E2220] flex items-baseline gap-2 sm:gap-3">
                   <span>HI! I&apos;M</span>
-                  <span className="pdf-script text-4xl sm:text-5xl lg:text-6xl text-[#E5A8AD] font-normal tracking-wide select-none">
+                  <span className="pdf-script text-5xl sm:text-6xl lg:text-7xl text-[#E5A8AD] font-normal tracking-wide select-none leading-none">
                     Nguyen
                   </span>
                 </h2>
@@ -276,7 +276,7 @@ export function Page1HeroAbout() {
 
               {/* Work Experiences */}
               <div className="pt-1">
-                <h3 className="pdf-script text-3xl sm:text-4xl text-[#E5A8AD] mb-3 select-none leading-tight">
+                <h3 className="pdf-script-rose-outline text-3xl sm:text-4xl mb-3 select-none leading-tight">
                   work experiences
                 </h3>
                 <div className="space-y-3.5">

@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Alex+Brush&family=Allura&family=Pinyon+Script&family=Monsieur+La+Doulaise&family=Lavishly+Yours&display=swap');
 @import "tailwindcss";
-@import "./fonts.css";
 
 @theme {
   --font-bevan: var(--font-bevan), "Bevan", serif;
   --font-pinyon: var(--font-script), "Pinyon Script", cursive;
+  --font-great-vibes: var(--font-great-vibes), "Great Vibes", cursive;
 }
 
 @layer base {
@@ -75,7 +76,7 @@
 .pinyon-script,
 .font-script,
 .pdf-script {
-  font-family: 'SloopScriptThankYou', var(--font-script), "Pinyon Script", cursive !important;
+  font-family: var(--font-script), "Pinyon Script", cursive !important;
   font-weight: 400;
   font-style: normal;
   text-transform: none;
@@ -101,13 +102,20 @@
   font-weight: 400;
   text-transform: none;
   color: #E5A8AD !important;
-  -webkit-text-stroke: 1.2px #1F1415;
+}
+
+.pdf-script-project {
+  font-family: 'SloopScriptTitle', var(--font-script), "Pinyon Script", cursive;
+  font-weight: 400;
+  text-transform: none;
+  color: #E5A8AD;
+  -webkit-text-stroke: 1.2px #2E2220;
   paint-order: stroke fill;
 }
 
 @media (min-width: 768px) {
-  .pdf-script-portfolio {
-    -webkit-text-stroke: 1.5px #1F1415;
+  .pdf-script-project {
+    -webkit-text-stroke: 1.2px #2E2220;
   }
 }
 
@@ -127,7 +135,7 @@
 }
 
 .pdf-script-rose-outline {
-  font-family: var(--font-script), "Pinyon Script", cursive;
+  font-family: var(--font-script), "Pinyon Script", cursive !important;
   font-weight: 400;
   text-transform: none;
   color: #E5A8AD !important;

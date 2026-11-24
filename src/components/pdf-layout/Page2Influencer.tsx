@@ -295,7 +295,16 @@ export function Page2Influencer() {
         {/* PROJECT 01 HEADER matching PDF Page 2                     */}
         {/* ========================================================= */}
         <div className="flex flex-col items-start">
-          <span className="pdf-script text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] text-[#E5A8AD] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none">
+          <span
+            className="text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none inline-block"
+            style={{
+              fontFamily: "'SloopScriptTitle', var(--font-script), 'Pinyon Script', cursive",
+              fontWeight: 400,
+              color: "#E5A8AD",
+              WebkitTextStroke: "1.2px #2E2220",
+              paintOrder: "stroke fill",
+            }}
+          >
             Project 01:
           </span>
           <h2 className="pdf-outline-title text-[1.5rem] sm:text-[2.35rem] lg:text-[3rem] tracking-wide leading-none">
