@@ -483,14 +483,16 @@ export function ProjectsHorizontal() {
       </div>
 
       {/* ========================================================= */}
-      {/* BOTTOM RIGHT: SKIP PROJECTS LINK                          */}
+      {/* BOTTOM RIGHT: SKIP PROJECTS BUTTON                        */}
       {/* ========================================================= */}
       <button
         onClick={handleSkipProjects}
-        className="absolute bottom-6 sm:bottom-8 right-6 sm:right-12 z-40 inline-flex items-center gap-1.5 text-xs font-heading font-bold uppercase tracking-widest text-[#7E6B69] hover:text-[#F2C4C4] transition-colors interactive-hover py-1 px-2 rounded-lg hover:bg-black/5"
+        className="group absolute bottom-6 sm:bottom-8 right-6 sm:right-12 z-40 inline-flex items-center gap-2.5 px-4 sm:px-5 py-2 sm:py-2.5 rounded-full bg-white/95 backdrop-blur-md border-[1.5px] border-[#DCA3A8] text-xs sm:text-[13px] font-heading font-bold uppercase tracking-widest text-[#3A2A28] shadow-[0_6px_20px_rgba(140,70,79,0.16)] hover:bg-[#8C464F] hover:text-white hover:border-[#8C464F] hover:shadow-[0_10px_28px_rgba(140,70,79,0.28)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200 cursor-pointer interactive-hover"
       >
         <span>SKIP PROJECTS</span>
-        <ArrowDown className="w-3.5 h-3.5" />
+        <span className="w-5 h-5 rounded-full bg-[#F4EAEB] text-[#8C464F] group-hover:bg-white/20 group-hover:text-white flex items-center justify-center transition-colors">
+          <ArrowDown className="w-3.5 h-3.5 group-hover:translate-y-0.5 transition-transform" />
+        </span>
       </button>
     </section>
   );

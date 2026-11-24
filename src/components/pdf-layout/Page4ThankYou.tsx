@@ -22,7 +22,7 @@ export function Page4ThankYou() {
     <footer
       id="page-4"
       aria-label="Thank You and Contact Page"
-      className="relative min-h-[90vh] w-full flex flex-col justify-between overflow-hidden bg-black text-white select-none"
+      className="relative min-h-[95vh] w-full flex flex-col justify-between overflow-hidden bg-black text-white select-none"
     >
       {/* Background High-Key Night Portrait */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -31,11 +31,11 @@ export function Page4ThankYou() {
           alt="Nguyen Phuong Nguyen"
           fill
           priority
-          style={{ objectPosition: "center 78%" }}
-          className="object-cover opacity-65 filter contrast-105 brightness-95"
+          style={{ objectPosition: "center bottom" }}
+          className="object-cover opacity-75 filter contrast-105 brightness-100"
         />
         {/* Soft vignette & gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-black/50" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-black/30" />
       </div>
 
       {/* Top Contact Items matching PDF Page 4 */}
@@ -110,9 +110,8 @@ export function Page4ThankYou() {
         </h2>
       </div>
 
-      {/* Bottom Bar: Copyright & Scroll to Top */}
-      <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pb-8 flex items-center justify-between text-xs text-white/70 border-t border-white/10 pt-4">
-        <p>© 2026 {PERSONAL_INFO.name}. All rights reserved.</p>
+      {/* Bottom Bar: Scroll to Top */}
+      <div className="relative z-10 w-full max-w-[1480px] mx-auto px-4 sm:px-6 lg:px-8 pb-8 flex items-center justify-end text-xs text-white/70 border-t border-white/10 pt-4">
         <button
           onClick={scrollToTop}
           className="flex items-center gap-1.5 hover:text-white transition-colors group"

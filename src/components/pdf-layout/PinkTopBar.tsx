@@ -36,7 +36,9 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
     tryAutoplay();
 
     // 2. Global fallback: start playing on the first user interaction anywhere on the screen
-    const handleFirstInteraction = () => {
+    const handleFirstInteraction = (evt: Event) => {
+      const target = evt.target as HTMLElement | null;
+      if (target?.closest("[data-audio-toggle]")) return;
       if (audio.paused) {
         audio
           .play()
@@ -52,12 +54,18 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
       window.addEventListener(evt, handleFirstInteraction, { once: true, passive: true });
     });
 
-    // 3. Keep state perfectly in sync with native audio events
+    // 3. Keep state perfectly in sync with native audio events & guarantee seamless loop
     const onPlay = () => setIsPlaying(true);
     const onPause = () => setIsPlaying(false);
+    const onEnded = () => {
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    };
 
+    audio.loop = true;
     audio.addEventListener("play", onPlay);
     audio.addEventListener("pause", onPause);
+    audio.addEventListener("ended", onEnded);
 
     return () => {
       events.forEach((evt) => {
@@ -65,6 +73,7 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
       });
       audio.removeEventListener("play", onPlay);
       audio.removeEventListener("pause", onPause);
+      audio.removeEventListener("ended", onEnded);
     };
   }, []);
 
@@ -110,6 +119,9 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
       audio.pause();
       setIsPlaying(false);
     } else {
+      if (audio.error) {
+        audio.load();
+      }
       audio
         .play()
         .then(() => setIsPlaying(true))
@@ -122,7 +134,7 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
       {/* Hidden HTML5 Audio Element */}
       <audio
         ref={audioRef}
-        src="/audio/mia-and-sebastians-theme.mp3"
+        src="/audio/snaptik.vn_7419265447847054598.mp3"
         autoPlay
         loop
         playsInline
@@ -142,6 +154,7 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
           {/* Audio Speaker Icon Button (Replaces NPN Portfolio text, only icon with 2 states) */}
           <button
             type="button"
+            data-audio-toggle="true"
             onClick={toggleAudio}
             aria-label={isPlaying ? "Mute audio" : "Play audio"}
             title={isPlaying ? "Tắt âm thanh" : "Bật âm thanh"}

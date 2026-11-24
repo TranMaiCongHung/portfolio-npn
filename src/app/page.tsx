@@ -1,3 +1,4 @@
+// Nguyen Phuong Nguyen Portfolio - Next.js
 import { PinkTopBar } from "@/components/pdf-layout/PinkTopBar";
 import { Page1HeroAbout } from "@/components/pdf-layout/Page1HeroAbout";
 import { ProjectsHorizontal } from "@/components/sections/ProjectsHorizontal";

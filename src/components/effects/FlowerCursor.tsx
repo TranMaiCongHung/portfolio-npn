@@ -314,17 +314,15 @@ export function FlowerCursor() {
       if (reducedMotion) {
         pos.current.x = pos.current.targetX;
         pos.current.y = pos.current.targetY;
-        pos.current.rotation = 0;
       } else {
-        // Smooth lerp + gentle continuous rotation
+        // Smooth lerp (keep cursor upright without continuous rotation)
         pos.current.x += (pos.current.targetX - pos.current.x) * (0.35 * delta);
         pos.current.y += (pos.current.targetY - pos.current.y) * (0.35 * delta);
-        pos.current.rotation += 0.35 * delta;
       }
 
       if (cursorRef.current) {
-        const { x, y, rotation } = pos.current;
-        cursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%) rotate(${rotation}deg)`;
+        const { x, y } = pos.current;
+        cursorRef.current.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`;
       }
 
       // Animate petals: burst deceleration, floating gravity, 3D flip, and fluttering sway
