@@ -351,6 +351,7 @@ export const SCENES: SceneDetail[] = [
       {
         id: "v-179k",
         poster: "/source/s01-video-4.webp",
+        videoSrc: "/videos/video-4.mp4",
         title: "KOC Collab Highlight",
         creator: "Top Performing Creator",
         views: "179K views",
@@ -359,6 +360,7 @@ export const SCENES: SceneDetail[] = [
       {
         id: "v-29k",
         poster: "/source/s01-video-3.webp",
+        videoSrc: "/videos/video-3.mp4",
         title: "Creator Product Feature",
         creator: "Campaign Creator",
         views: "29.2K views",
@@ -367,6 +369,7 @@ export const SCENES: SceneDetail[] = [
       {
         id: "v-24k",
         poster: "/source/s01-video-2.webp",
+        videoSrc: "/videos/video-2.mp4",
         title: "Short-form Lifestyle Review",
         creator: "Lifestyle KOC",
         views: "24.2K views",
@@ -375,6 +378,7 @@ export const SCENES: SceneDetail[] = [
       {
         id: "v-14k",
         poster: "/source/s01-video-1.webp",
+        videoSrc: "/videos/video-1.mp4",
         title: "Seeding & Product Intro",
         creator: "Beauty/Fashion KOC",
         views: "14.4K views",
@@ -872,6 +876,7 @@ export const ALL_VIDEOS: VideoItem[] = [
   {
     id: "v1",
     poster: "/source/s01-video-4.webp",
+    videoSrc: "/videos/video-4.mp4",
     title: "KOC Booking Highlight",
     creator: "Creator Collaboration",
     views: "179K views",
@@ -880,6 +885,7 @@ export const ALL_VIDEOS: VideoItem[] = [
   {
     id: "v2",
     poster: "/source/s01-video-3.webp",
+    videoSrc: "/videos/video-3.mp4",
     title: "Viral Product Story",
     creator: "Seeding Campaign",
     views: "29.2K views",
@@ -888,6 +894,7 @@ export const ALL_VIDEOS: VideoItem[] = [
   {
     id: "v3",
     poster: "/source/s01-video-2.webp",
+    videoSrc: "/videos/video-2.mp4",
     title: "Organic Creator Review",
     creator: "Lifestyle KOC",
     views: "24.2K views",
@@ -896,6 +903,7 @@ export const ALL_VIDEOS: VideoItem[] = [
   {
     id: "v4",
     poster: "/source/s01-video-1.webp",
+    videoSrc: "/videos/video-1.mp4",
     title: "Campaign Seeding Feature",
     creator: "Fashion KOC",
     views: "14.4K views",

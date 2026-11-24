@@ -40,7 +40,7 @@ export function ProjectScenesDetail() {
             {/* SCRIPT PROJECT INTRO & TOP HEADER (Faithfully matching PDF) */}
             <div className="pb-6 mb-8 border-b border-[rgba(58,42,40,0.1)]">
               {/* Elegant script label: "Project 01:", "Project 02:", "Project 03:", etc. */}
-              <span className="font-pinyon pdf-script text-3xl sm:text-4xl lg:text-5xl text-[#F2C4C4] mb-2 block select-none">
+              <span className="pdf-script text-3xl sm:text-4xl lg:text-5xl text-[#E5A8AD] mb-2 block select-none">
                 {scene.projectScriptLabel ?? `Project ${scene.number}:`}
               </span>
 

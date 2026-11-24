@@ -31,10 +31,11 @@ export function Page4ThankYou() {
           alt="Nguyen Phuong Nguyen"
           fill
           priority
-          className="object-cover object-center opacity-65 filter contrast-105 brightness-95"
+          style={{ objectPosition: "center 78%" }}
+          className="object-cover opacity-65 filter contrast-105 brightness-95"
         />
         {/* Soft vignette & gradient overlays */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/35 to-black/60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/25 to-black/50" />
       </div>
 
       {/* Top Contact Items matching PDF Page 4 */}
@@ -102,9 +103,9 @@ export function Page4ThankYou() {
         </div>
       </div>
 
-      {/* Centerpiece: Huge Glowing Script "Thank You" matching PDF Page 4 */}
+      {/* Centerpiece: Authentic Script "Thank You" matching PDF Page 4 */}
       <div className="relative z-10 w-full flex items-center justify-center py-12 sm:py-20 my-auto text-center pointer-events-none">
-        <h2 className="pdf-script text-[clamp(4.5rem,18vw,14rem)] text-[#F2C4C4] leading-none transform -rotate-2 drop-shadow-[0_4px_30px_rgba(201,112,123,0.5)]">
+        <h2 className="pdf-script-thankyou text-[clamp(4.5rem,18vw,14rem)] leading-none drop-shadow-[0_4px_30px_rgba(201,112,123,0.5)]">
           Thank You
         </h2>
       </div>
