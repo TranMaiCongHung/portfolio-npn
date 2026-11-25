@@ -29,7 +29,7 @@ import { AnimatedCounter } from "@/components/common/AnimatedCounter";
 const TIKTOK_VIDEOS = [
   {
     id: "v1",
-    title: "Varna Life Cà Phê Latte",
+    title: "NUTIFOODS",
     views: "14.4K",
     creator: "KOC Booking",
     poster: "/source/s01-video-1.webp",
@@ -37,7 +37,7 @@ const TIKTOK_VIDEOS = [
   },
   {
     id: "v2",
-    title: "Vitamin E Thiên Nhiên",
+    title: "ENAT",
     views: "24.2K",
     creator: "KOC Booking",
     poster: "/source/s01-video-2.webp",
@@ -45,7 +45,7 @@ const TIKTOK_VIDEOS = [
   },
   {
     id: "v3",
-    title: "ENAT - Chăm Sóc Sức Khỏe",
+    title: "HALIO",
     views: "29.2K",
     creator: "KOC Booking",
     poster: "/source/s01-video-3.webp",
@@ -53,7 +53,7 @@ const TIKTOK_VIDEOS = [
   },
   {
     id: "v4",
-    title: "Sáp Thơm X-Men Dành Cho Anh Em",
+    title: "XMEN",
     views: "17.9K",
     creator: "KOC Booking",
     poster: "/source/s01-video-4.webp",

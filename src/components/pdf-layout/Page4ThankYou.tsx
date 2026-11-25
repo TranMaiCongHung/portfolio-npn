@@ -104,8 +104,8 @@ export function Page4ThankYou() {
       </div>
 
       {/* Centerpiece: Authentic Script "Thank You" matching PDF Page 4 */}
-      <div className="relative z-10 w-full flex items-center justify-center py-12 sm:py-20 my-auto text-center pointer-events-none">
-        <h2 className="pdf-script-thankyou text-[clamp(4.5rem,18vw,14rem)] leading-none drop-shadow-[0_4px_30px_rgba(201,112,123,0.5)]">
+      <div className="relative z-10 w-full flex items-center justify-center px-4 py-12 sm:py-20 my-auto text-center pointer-events-none">
+        <h2 className="pdf-script-thankyou text-[clamp(2.5rem,17.5vw,22rem)] whitespace-nowrap leading-none drop-shadow-[0_4px_30px_rgba(201,112,123,0.5)]">
           Thank You
         </h2>
       </div>
