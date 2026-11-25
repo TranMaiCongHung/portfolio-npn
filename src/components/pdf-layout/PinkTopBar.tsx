@@ -11,6 +11,7 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const userPausedRef = useRef(false);
 
   // Audio setup and auto-play handler
   useEffect(() => {
@@ -18,25 +19,37 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
     if (!audio) return;
 
     audio.volume = 0.5;
+    audio.loop = true;
 
-    // 1. Try auto-playing immediately on mount
+    const activationEvents = ["click", "pointerdown", "touchstart", "touchend", "keydown"];
+
+    const cleanupInteractionListeners = () => {
+      activationEvents.forEach((evt) => {
+        window.removeEventListener(evt, handleFirstInteraction, { capture: true });
+      });
+    };
+
+    // 1. Try auto-playing immediately on mount (and when audio is ready)
     const tryAutoplay = () => {
+      if (userPausedRef.current || !audio.paused) return;
       audio
         .play()
         .then(() => {
           setIsPlaying(true);
+          cleanupInteractionListeners();
         })
         .catch(() => {
-          // If browser restricts autoplay before user gesture,
-          // wait for the very first interaction of ANY kind (click, touch, key, scroll, wheel)
+          // Browser blocked unmuted autoplay before user gesture; wait for first interaction
           setIsPlaying(false);
         });
     };
 
-    tryAutoplay();
-
-    // 2. Global fallback: start playing on the first user interaction anywhere on the screen
+    // 2. Global fallback: start playing on the first valid user gesture anywhere on the screen
     const handleFirstInteraction = (evt: Event) => {
+      if (userPausedRef.current) {
+        cleanupInteractionListeners();
+        return;
+      }
       const target = evt.target as HTMLElement | null;
       if (target?.closest("[data-audio-toggle]")) return;
       if (audio.paused) {
@@ -44,15 +57,20 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
           .play()
           .then(() => {
             setIsPlaying(true);
+            cleanupInteractionListeners();
           })
           .catch(() => {});
+      } else {
+        cleanupInteractionListeners();
       }
     };
 
-    const events = ["click", "pointerdown", "touchstart", "keydown", "wheel", "scroll"];
-    events.forEach((evt) => {
-      window.addEventListener(evt, handleFirstInteraction, { once: true, passive: true });
+    activationEvents.forEach((evt) => {
+      window.addEventListener(evt, handleFirstInteraction, { capture: true, passive: true });
     });
+
+    tryAutoplay();
+    audio.addEventListener("canplay", tryAutoplay, { once: true });
 
     // 3. Keep state perfectly in sync with native audio events & guarantee seamless loop
     const onPlay = () => setIsPlaying(true);
@@ -62,15 +80,13 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
       audio.play().catch(() => {});
     };
 
-    audio.loop = true;
     audio.addEventListener("play", onPlay);
     audio.addEventListener("pause", onPause);
     audio.addEventListener("ended", onEnded);
 
     return () => {
-      events.forEach((evt) => {
-        window.removeEventListener(evt, handleFirstInteraction);
-      });
+      cleanupInteractionListeners();
+      audio.removeEventListener("canplay", tryAutoplay);
       audio.removeEventListener("play", onPlay);
       audio.removeEventListener("pause", onPause);
       audio.removeEventListener("ended", onEnded);
@@ -116,9 +132,11 @@ export function PinkTopBar({ currentPage }: PinkTopBarProps) {
     if (!audio) return;
 
     if (!audio.paused) {
+      userPausedRef.current = true;
       audio.pause();
       setIsPlaying(false);
     } else {
+      userPausedRef.current = false;
       if (audio.error) {
         audio.load();
       }
