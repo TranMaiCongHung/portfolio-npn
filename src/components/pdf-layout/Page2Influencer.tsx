@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Play, Eye, ArrowRight, Volume2, VolumeX } from "lucide-react";
+import { Play, Eye, ArrowRight } from "lucide-react";
 
 // Brand Collaborations Logos
 import logoMega from "@/brands/mega-wecare@2x.png";
@@ -74,7 +74,6 @@ function TikTokVideoCard({ video }: { video: TikTokVideoItem }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(true);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
@@ -109,20 +108,13 @@ function TikTokVideoCard({ video }: { video: TikTokVideoItem }) {
   const handleTogglePlay = () => {
     const vid = videoRef.current;
     if (!vid) return;
+    vid.muted = true;
     if (vid.paused) {
       vid.play().then(() => setIsPlaying(true)).catch(() => {});
     } else {
       vid.pause();
       setIsPlaying(false);
     }
-  };
-
-  const handleToggleMute = (e: React.MouseEvent) => {
-    e.stopPropagation();
-    const vid = videoRef.current;
-    if (!vid) return;
-    vid.muted = !vid.muted;
-    setIsMuted(vid.muted);
   };
 
   return (
@@ -163,20 +155,6 @@ function TikTokVideoCard({ video }: { video: TikTokVideoItem }) {
         <Eye className="w-3 h-3 text-[#DCA3A8]" />
         <span className="font-bevan bevan-regular tracking-wide">{video.views}</span>
       </div>
-
-      {/* Sound toggle button */}
-      <button
-        type="button"
-        onClick={handleToggleMute}
-        aria-label={isMuted ? "Bật âm thanh" : "Tắt âm thanh"}
-        className="absolute top-2.5 right-2.5 z-10 w-7 h-7 rounded-full bg-black/60 backdrop-blur-md text-white flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity"
-      >
-        {isMuted ? (
-          <VolumeX className="w-3.5 h-3.5 text-white/80" />
-        ) : (
-          <Volume2 className="w-3.5 h-3.5 text-[#E5A8AD]" />
-        )}
-      </button>
 
       {/* Subtle play indicator when paused */}
       {!isPlaying && !hasError && (
@@ -298,7 +276,7 @@ export function Page2Influencer() {
           <span
             className="text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none inline-block"
             style={{
-              fontFamily: "'SloopScriptTitle', var(--font-script), 'Pinyon Script', cursive",
+              fontFamily: "var(--font-script), 'Pinyon Script', cursive",
               fontWeight: 400,
               color: "#E5A8AD",
               WebkitTextStroke: "1.2px #2E2220",
@@ -730,13 +708,6 @@ export function Page2Influencer() {
         <div className="w-full pt-4 sm:pt-6">
           {/* Section Header with Line */}
           <div className="flex items-center gap-2.5 mb-8 sm:mb-12">
-            <Image
-              src="/source/lily-pink.webp"
-              alt="🌸"
-              width={22}
-              height={22}
-              className="object-contain flex-shrink-0"
-            />
             <h3 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.85rem] tracking-wider whitespace-nowrap leading-none">
               BRAND COLLABORATIONS
             </h3>
@@ -771,23 +742,16 @@ export function Page2Influencer() {
         {/* FEATURED VIDEOS (TikTok 9:16)                             */}
         {/* ========================================================= */}
         <div className="w-full pt-4">
-          <div className="flex items-center gap-2 mb-4 pb-2 border-b border-[#E8DFDC]">
-            <Image
-              src="/source/lily-pink.webp"
-              alt="🌸"
-              width={18}
-              height={18}
-              className="object-contain"
-            />
-            <h3 className="pdf-outline-title text-base sm:text-xl tracking-wider">
+          <div className="flex items-center gap-2.5 mb-4 pb-2 border-b border-[#E8DFDC]">
+            <h3 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.85rem] tracking-wider leading-none">
               FEATURED VIDEOS
             </h3>
-            <div className="ml-2 w-6 h-6 rounded-md bg-black flex items-center justify-center p-1">
+            <div className="ml-1 w-6 h-6 sm:w-7 sm:h-7 rounded-md bg-black flex items-center justify-center p-1">
               <Image
                 src="/source/icon-tiktok.webp"
                 alt="TikTok"
-                width={16}
-                height={16}
+                width={18}
+                height={18}
                 className="object-contain"
               />
             </div>
@@ -805,23 +769,16 @@ export function Page2Influencer() {
         {/* SEEDING THREADS                                           */}
         {/* ========================================================= */}
         <div className="w-full pt-4">
-          <div className="flex items-center gap-2 mb-4">
-            <Image
-              src="/source/lily-pink.webp"
-              alt="🌸"
-              width={18}
-              height={18}
-              className="object-contain"
-            />
-            <h3 className="pdf-outline-title text-base sm:text-xl tracking-wider">
+          <div className="flex items-center gap-2.5 mb-4">
+            <h3 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.85rem] tracking-wider leading-none">
               SEEDING THREADS
             </h3>
-            <div className="ml-2 w-6 h-6 rounded-md bg-black flex items-center justify-center p-1">
+            <div className="ml-1 w-6 h-6 sm:w-7 sm:h-7 rounded-md bg-black flex items-center justify-center p-1">
               <Image
                 src="/source/icon-threads.webp"
                 alt="Threads"
-                width={16}
-                height={16}
+                width={18}
+                height={18}
                 className="object-contain"
               />
             </div>
@@ -886,7 +843,7 @@ export function Page2Influencer() {
                 {/* 1. Floating Vintage Camera (016) on the Left */}
                 <div className="absolute -left-8 sm:-left-12 md:-left-14 top-6 sm:top-8 md:top-10 z-20 w-16 sm:w-20 md:w-24 aspect-[406/258] pointer-events-none animate-float-camera filter drop-shadow-md">
                   <Image
-                    src="/out/016.png"
+                    src="/media/vintage-camera.png"
                     alt="Vintage Camera"
                     fill
                     sizes="(max-width: 640px) 64px, (max-width: 768px) 80px, 96px"
@@ -897,7 +854,7 @@ export function Page2Influencer() {
                 {/* 2. Floating White Lily (017) on the Right (Pushed well away from body) */}
                 <div className="absolute -right-16 sm:-right-20 md:-right-28 lg:-right-32 top-28 sm:top-32 md:top-36 z-20 w-14 sm:w-16 md:w-20 aspect-[448/472] pointer-events-none animate-float-flower filter drop-shadow-sm">
                   <Image
-                    src="/out/017.png"
+                    src="/media/white-lily.png"
                     alt="White Lily Flower"
                     fill
                     sizes="(max-width: 640px) 56px, (max-width: 768px) 64px, 80px"

@@ -204,7 +204,7 @@ export function Page3Projects() {
                   <span
                     className="text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1 inline-block"
                     style={{
-                      fontFamily: "'SloopScriptTitle', var(--font-script), 'Pinyon Script', cursive",
+                      fontFamily: "var(--font-script), 'Pinyon Script', cursive",
                       fontWeight: 400,
                       color: "#E5A8AD",
                       WebkitTextStroke: "1.2px #2E2220",
@@ -432,15 +432,8 @@ export function Page3Projects() {
 
           {/* Top-Performance Videos */}
           <div>
-            <div className="flex items-center gap-2 mb-4 pb-2 border-b border-[#E8DFDC]">
-              <Image
-                src="/source/lily-pink.webp"
-                alt="🌸"
-                width={18}
-                height={18}
-                className="object-contain"
-              />
-              <h4 className="pdf-outline-title text-base sm:text-lg tracking-wider">
+            <div className="flex items-center gap-2.5 mb-4 pb-2 border-b border-[#E8DFDC]">
+              <h4 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.75rem] tracking-wider leading-none">
                 TOP-PERFORMANCE VIDEOS
               </h4>
             </div>
@@ -596,7 +589,7 @@ export function Page3Projects() {
                   <span
                     className="text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1 inline-block"
                     style={{
-                      fontFamily: "'SloopScriptTitle', var(--font-script), 'Pinyon Script', cursive",
+                      fontFamily: "var(--font-script), 'Pinyon Script', cursive",
                       fontWeight: 400,
                       color: "#E5A8AD",
                       WebkitTextStroke: "1.2px #2E2220",
@@ -662,15 +655,8 @@ export function Page3Projects() {
 
           {/* Featured Lessons Videos */}
           <div>
-            <div className="flex items-center gap-2 mb-4 pb-2 border-b border-[#E8DFDC]">
-              <Image
-                src="/source/lily-pink.webp"
-                alt="🌸"
-                width={18}
-                height={18}
-                className="object-contain"
-              />
-              <h4 className="pdf-outline-title text-base sm:text-lg tracking-wider">
+            <div className="flex items-center gap-2.5 mb-4 pb-2 border-b border-[#E8DFDC]">
+              <h4 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.75rem] tracking-wider leading-none">
                 FEATURED LESSONS VIDEOS
               </h4>
             </div>
@@ -822,7 +808,7 @@ export function Page3Projects() {
                   <span
                     className="text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1 inline-block"
                     style={{
-                      fontFamily: "'SloopScriptTitle', var(--font-script), 'Pinyon Script', cursive",
+                      fontFamily: "var(--font-script), 'Pinyon Script', cursive",
                       fontWeight: 400,
                       color: "#E5A8AD",
                       WebkitTextStroke: "1.2px #2E2220",
@@ -865,7 +851,7 @@ export function Page3Projects() {
 
               {/* Experience Gained */}
               <div className="pt-1">
-                <h5 className="pdf-outline-title text-sm sm:text-base lg:text-lg tracking-wider mb-2">
+                <h5 className="pdf-outline-title text-xl sm:text-2xl lg:text-[1.75rem] tracking-wider mb-2.5 leading-none">
                   EXPERIENCE GAINED
                 </h5>
                 <p className="text-xs sm:text-sm text-[#4A3835] leading-relaxed">
@@ -988,7 +974,7 @@ export function Page3Projects() {
                   <span
                     className="text-[3.25rem] sm:text-[4.25rem] md:text-[4.75rem] lg:text-[5.25rem] -mb-1 sm:-mb-2 md:-mb-2.5 lg:-mb-3 relative z-10 select-none leading-none pl-1 inline-block"
                     style={{
-                      fontFamily: "'SloopScriptTitle', var(--font-script), 'Pinyon Script', cursive",
+                      fontFamily: "var(--font-script), 'Pinyon Script', cursive",
                       fontWeight: 400,
                       color: "#E5A8AD",
                       WebkitTextStroke: "1.2px #2E2220",
@@ -1222,8 +1208,8 @@ export function Page3Projects() {
               </h3>
             </div>
 
-            {/* Center & Right Group: Profile Widget (pushed left closer to title) + Threads App Icon (nudged left from edge) */}
-            <div className="flex-1 flex flex-wrap sm:flex-nowrap items-center justify-between gap-6 sm:gap-8 lg:pr-10 xl:pr-14">
+            {/* Center & Right Group: Profile Widget (pushed left closer to title) + Threads App Icon (moved left ~30%) */}
+            <div className="flex-1 flex flex-wrap sm:flex-nowrap items-center justify-between gap-6 sm:gap-8 md:pr-[15%] lg:pr-[25%] xl:pr-[30%]">
               {/* Profile Widget: Avatar + @ursonlyonee + 115 FOLLOWERS / 121,000 VIEWS + Curved Arrow */}
               <a
                 href="https://www.threads.net/@ursonlyonee"

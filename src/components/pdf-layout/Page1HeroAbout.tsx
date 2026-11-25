@@ -1,7 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import Image from "next/image";
+import { gsap } from "gsap";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 import { FlowerBubbles } from "../effects/FlowerBubbles";
 import { MoonContactWidget } from "./MoonContactWidget";
@@ -41,6 +42,61 @@ const EXPERIENCES = [
 ];
 
 export function Page1HeroAbout() {
+  const signatureSvgRef = useRef<SVGSVGElement>(null);
+  const mainStrokeRef = useRef<SVGPathElement>(null);
+  const crossStrokeRef = useRef<SVGPathElement>(null);
+  const dotStrokeRef = useRef<SVGPathElement>(null);
+  const finishRectRef = useRef<SVGRectElement>(null);
+
+  useEffect(() => {
+    const svg = signatureSvgRef.current;
+    const mainPath = mainStrokeRef.current;
+    const crossPath = crossStrokeRef.current;
+    const dotPath = dotStrokeRef.current;
+    const finishRect = finishRectRef.current;
+    if (!svg || !mainPath || !crossPath || !dotPath || !finishRect) return;
+
+    const ctx = gsap.context(() => {
+      const mainLen = mainPath.getTotalLength();
+      const crossLen = crossPath.getTotalLength();
+      const dotLen = dotPath.getTotalLength();
+
+      gsap.set(mainPath, { strokeDasharray: mainLen, strokeDashoffset: mainLen });
+      gsap.set(crossPath, { strokeDasharray: crossLen, strokeDashoffset: crossLen });
+      gsap.set(dotPath, { strokeDasharray: dotLen, strokeDashoffset: dotLen });
+      gsap.set(finishRect, { opacity: 0 });
+      gsap.set(svg, { opacity: 1 });
+
+      const tl = gsap.timeline({ delay: 0.45 });
+      tl.to(mainPath, {
+        strokeDashoffset: 0,
+        duration: 1.85,
+        ease: "power1.inOut",
+      })
+        .to(crossPath, {
+          strokeDashoffset: 0,
+          duration: 0.25,
+          ease: "power2.out",
+        })
+        .to(dotPath, {
+          strokeDashoffset: 0,
+          duration: 0.15,
+          ease: "power2.out",
+        })
+        .to(
+          finishRect,
+          {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power1.out",
+          },
+          "-=0.4"
+        );
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
       id="page-1"
@@ -57,7 +113,7 @@ export function Page1HeroAbout() {
         {/* ========================================================= */}
         <div className="relative w-full text-center pt-4 pb-8 select-none">
           {/* Lily Background Motif behind the Title */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 pointer-events-none opacity-45 -z-10">
+          <div className="hero-motif-reveal absolute left-1/2 top-1/2 w-64 sm:w-80 md:w-96 h-64 sm:h-80 md:h-96 pointer-events-none -z-10">
             <Image
               src="/source/p1_007.png"
               alt="Lily Flower Motif"
@@ -69,22 +125,95 @@ export function Page1HeroAbout() {
 
           {/* Outlined Main Headline */}
           <div className="flex flex-col items-center justify-center leading-none">
-            <h1 className="pdf-outline-title text-[clamp(2.5rem,8vw,6.5rem)] tracking-wide">
+            <h1 className="hero-fade-up-1 pdf-outline-title text-[clamp(2.5rem,8vw,6.5rem)] tracking-wide">
               PHUONG NGUYEN
             </h1>
             <div className="relative inline-block">
-              <span className="pdf-outline-title text-[clamp(2.5rem,8vw,6.5rem)] tracking-wide block">
+              <span className="hero-fade-up-2 pdf-outline-title text-[clamp(2.5rem,8vw,6.5rem)] tracking-wide block">
                 NGUYEN
               </span>
-              {/* Slanted Script 'portfolio' across NGUYEN */}
-              <span className="pdf-script-portfolio text-[clamp(2.8rem,9vw,7.5rem)] absolute -right-4 sm:-right-8 -bottom-3 sm:-bottom-5 transform rotate-[-8deg] pointer-events-none drop-shadow-sm select-none">
-                portfolio
+              {/* Slanted Script 'portfolio' across NGUYEN with stroke-by-stroke signature animation */}
+              <span
+                className="pdf-script-portfolio text-[clamp(2.8rem,9vw,7.5rem)] absolute -right-4 sm:-right-8 -bottom-3 sm:-bottom-5 transform rotate-[-8deg] pointer-events-none drop-shadow-sm select-none inline-block"
+                aria-label="portfolio"
+              >
+                <svg
+                  ref={signatureSvgRef}
+                  viewBox="0 0 400 155"
+                  className="w-[3.45em] h-[1.35em] overflow-visible block opacity-0"
+                  role="img"
+                  aria-hidden="true"
+                >
+                  <defs>
+                    <mask
+                      id="portfolio-signature-mask"
+                      x="-50"
+                      y="-50"
+                      width="500"
+                      height="255"
+                      maskUnits="userSpaceOnUse"
+                      maskContentUnits="userSpaceOnUse"
+                    >
+                      <rect x="-50" y="-50" width="500" height="255" fill="black" />
+                      {/* Main cursive stroke: p -> o -> r -> t -> f -> o -> l -> i -> o */}
+                      <path
+                        ref={mainStrokeRef}
+                        d="M 28 84 Q 40 72 52 68 L 4 146 Q 28 96 54 72 Q 74 66 72 84 Q 66 98 48 94 Q 68 96 84 78 Q 100 66 108 80 Q 108 98 88 96 Q 76 90 96 76 Q 112 72 124 68 Q 124 84 118 96 Q 130 88 142 74 Q 154 58 164 36 Q 154 72 148 94 Q 160 98 176 80 Q 196 48 218 14 Q 222 12 212 28 Q 192 82 170 132 Q 188 98 208 82 Q 220 70 236 72 Q 246 80 240 94 Q 224 102 216 88 Q 226 74 248 80 Q 266 52 282 14 Q 286 12 276 28 Q 258 72 252 94 Q 264 98 278 82 Q 288 70 296 68 Q 286 84 286 94 Q 296 98 308 82 Q 318 70 334 72 Q 344 80 338 94 Q 322 102 314 88 Q 330 78 358 74"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="38"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      {/* Crossbar of 't' */}
+                      <path
+                        ref={crossStrokeRef}
+                        d="M 140 58 Q 158 54 178 56"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="26"
+                        strokeLinecap="round"
+                      />
+                      {/* Dot of 'i' */}
+                      <path
+                        ref={dotStrokeRef}
+                        d="M 302 40 L 306 46"
+                        fill="none"
+                        stroke="white"
+                        strokeWidth="26"
+                        strokeLinecap="round"
+                      />
+                      {/* Final full-reveal safety rect for fine swashes */}
+                      <rect
+                        ref={finishRectRef}
+                        x="-50"
+                        y="-50"
+                        width="500"
+                        height="255"
+                        fill="white"
+                      />
+                    </mask>
+                  </defs>
+                  <text
+                    x="22"
+                    y="100"
+                    fill="#E5A8AD"
+                    mask="url(#portfolio-signature-mask)"
+                    style={{
+                      fontFamily: 'var(--font-script), "Pinyon Script", cursive',
+                      fontSize: "112px",
+                      fontWeight: 400,
+                    }}
+                  >
+                    portfolio
+                  </text>
+                </svg>
               </span>
             </div>
           </div>
 
           {/* Subtitle with Flower Separators (pushed down so 'portfolio' descender doesn't overlap) */}
-          <div className="mt-12 sm:mt-14 md:mt-16 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm font-montserrat font-bold text-[#5A4340] tracking-wider uppercase">
+          <div className="hero-fade-up-3 mt-12 sm:mt-14 md:mt-16 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-xs sm:text-sm font-montserrat font-bold text-[#5A4340] tracking-wider uppercase">
             <span className="pdf-outline-title text-sm sm:text-base tracking-widest text-[#2E2220]">
               CONTENT MARKETING
             </span>
@@ -114,7 +243,7 @@ export function Page1HeroAbout() {
         {/* ========================================================= */}
         {/* TWO-COLUMN CONTENT AREA matching PDF Page 1               */}
         {/* ========================================================= */}
-        <div className="w-full grid grid-cols-1 md:grid-cols-[340px_1fr] lg:grid-cols-[380px_1fr] xl:grid-cols-[400px_1fr] gap-6 sm:gap-8 lg:gap-10 mt-8 items-stretch">
+        <div className="hero-fade-up-4 w-full grid grid-cols-1 md:grid-cols-[340px_1fr] lg:grid-cols-[380px_1fr] xl:grid-cols-[400px_1fr] gap-6 sm:gap-8 lg:gap-10 mt-8 items-stretch">
           {/* ------------------------------------------------------- */}
           {/* LEFT COLUMN: Photo, Badges, Education, Tools, Skills    */}
           {/* ------------------------------------------------------- */}
