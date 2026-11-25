@@ -134,7 +134,7 @@ export function Page1HeroAbout() {
               </span>
               {/* Slanted Script 'portfolio' across NGUYEN with stroke-by-stroke signature animation */}
               <span
-                className="pdf-script-portfolio text-[clamp(2.8rem,9vw,7.5rem)] absolute -right-4 sm:-right-8 -bottom-3 sm:-bottom-5 transform rotate-[-8deg] pointer-events-none drop-shadow-sm select-none inline-block"
+                className="pdf-script-portfolio text-[clamp(2.8rem,9vw,7.5rem)] absolute -right-[0.68em] sm:-right-[0.78em] -bottom-[0.42em] sm:-bottom-[0.48em] transform rotate-[-8deg] pointer-events-none drop-shadow-sm select-none inline-block"
                 aria-label="portfolio"
               >
                 <svg
