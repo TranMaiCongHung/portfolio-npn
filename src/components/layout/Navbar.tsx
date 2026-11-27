@@ -135,14 +135,6 @@ export function Navbar() {
               <span>Download CV (Canva)</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
-            <a
-              href={PERSONAL_INFO.portfolioPdfUrl}
-              download
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl border border-[rgba(58,42,40,0.15)] text-[#3A2A28] text-xs uppercase tracking-wider font-medium"
-            >
-              <span>Download PDF Portfolio</span>
-            </a>
           </div>
         </div>
       )}

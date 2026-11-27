@@ -129,14 +129,6 @@ export function Contact() {
                 <span>Download CV</span>
                 <ArrowUpRight className="w-4 h-4" />
               </a>
-
-              <a
-                href={PERSONAL_INFO.portfolioPdfUrl}
-                download
-                className="inline-flex items-center gap-2 px-5 py-3.5 rounded-full bg-transparent hover:bg-white/60 border border-[rgba(58,42,40,0.15)] text-[#5A4340] text-xs uppercase tracking-wider font-semibold transition-colors interactive-hover"
-              >
-                <span>Download PDF</span>
-              </a>
             </div>
           </div>
         </div>
