@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Image from "next/image";
-import { Mail, Phone, Download, FileText, ArrowUp, Check } from "lucide-react";
+import { Mail, Phone, FileText, ArrowUp, Check } from "lucide-react";
 import { PERSONAL_INFO } from "@/data/portfolioData";
 
 export function Page4ThankYou() {
@@ -81,15 +81,6 @@ export function Page4ThankYou() {
 
           {/* Quick Action Buttons */}
           <div className="flex flex-wrap items-center gap-3">
-            <a
-              href="/PORTFOLIO.pdf"
-              download
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 hover:bg-white/30 backdrop-blur-md text-white text-xs font-semibold tracking-wider transition-all hover:scale-105 border border-white/30"
-            >
-              <Download className="w-3.5 h-3.5" />
-              <span>Download PDF Portfolio</span>
-            </a>
-
             <a
               href={PERSONAL_INFO.canvaCvUrl}
               target="_blank"
